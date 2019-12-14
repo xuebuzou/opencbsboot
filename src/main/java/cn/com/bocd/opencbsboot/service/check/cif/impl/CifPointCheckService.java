@@ -1,7 +1,7 @@
 package cn.com.bocd.opencbsboot.service.check.cif.impl;
 
-import cn.com.bocd.opencbsboot.cddata.helper.CDUtils;
-import cn.com.bocd.opencbsboot.cddata.helper.CompositeData;
+import cn.com.bocd.opencbsboot.tool.compositedata.helper.CDUtils;
+import cn.com.bocd.opencbsboot.tool.compositedata.helper.CompositeData;
 import cn.com.bocd.opencbsboot.dao.cif.FmClientPointDAO;
 import cn.com.bocd.opencbsboot.exception.OpenCbsException;
 import cn.com.bocd.opencbsboot.service.check.cif.CifCheckService;

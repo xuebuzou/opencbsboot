@@ -1,8 +1,8 @@
 package cn.com.bocd.opencbsboot.test;
 
-import cn.com.bocd.opencbsboot.cddata.helper.CDUtils;
-import cn.com.bocd.opencbsboot.cddata.helper.CompositeData;
-import cn.com.bocd.opencbsboot.web.helper.rpc.impl.ESBBoundTransformer;
+import cn.com.bocd.opencbsboot.tool.compositedata.helper.CDUtils;
+import cn.com.bocd.opencbsboot.tool.compositedata.helper.CompositeData;
+import cn.com.bocd.opencbsboot.web.util.rpc.impl.ESBBoundTransformer;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
@@ -21,7 +21,7 @@ public class SpringBootTest {
         ESBBoundTransformer transformer = new ESBBoundTransformer();
         Socket s = new Socket("localhost", 8899);
 
-        String path = SpringBootTest.class.getResource("/packet/14009009.xml").getPath();
+        String path = SpringBootTest.class.getResource("14009009.xml").getPath();
         File packet = new File(path);
         transformer.compositeData2Byte(CDUtils.fromFile(packet), s.getOutputStream());
         s.getOutputStream().flush();
