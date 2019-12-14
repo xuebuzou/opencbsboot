@@ -97,7 +97,7 @@ public class OpenCbsDispatcher implements Dispatcher, ApplicationContextAware {
                 switch (eventType) {
                     case START_TAG:
                         String tagName = parser.getName();
-                        if ("flowconfig".equals(tagName)) {
+                        if ("flow".equals(tagName)) {
                             ctx.setMsgType(parser.getAttributeValue(0));
                             ctx.setMsgCode(parser.getAttributeValue(1));
                             ctx.setSrcType(parser.getAttributeValue(2));
@@ -106,7 +106,7 @@ public class OpenCbsDispatcher implements Dispatcher, ApplicationContextAware {
                         }
                         break;
                     case END_TAG:
-                        if ("flowconfig".equals(parser.getName())) {
+                        if ("flow".equals(parser.getName())) {
                             Flow flow = new Flow();
                             flow.setMsgType(ctx.getMsgType());
                             flow.setMsgCode(ctx.getMsgCode());
