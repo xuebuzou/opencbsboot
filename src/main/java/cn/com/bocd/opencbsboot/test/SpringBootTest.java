@@ -30,17 +30,4 @@ public class SpringBootTest {
         logger.info("返回报文:\n" + CDUtils.toXml(cdExcepted, true));
         s.close();
     }
-
-    public static void main(String[] args) throws IOException {
-        ESBBoundTransformer transformer = new ESBBoundTransformer();
-        Socket s = new Socket("localhost", 8899);
-        String path = SpringBootTest.class.getResource("14009009").getPath();
-        File packet = new File(path);
-        transformer.compositeData2Byte(CDUtils.fromFile(packet), s.getOutputStream());
-        s.getOutputStream().flush();
-        InputStream resp = s.getInputStream();
-        CompositeData cdExcepted = transformer.byte2CompositeData(resp);
-        logger.info("返回报文:\n" + CDUtils.toXml(cdExcepted, true));
-        s.close();
-    }
 }
