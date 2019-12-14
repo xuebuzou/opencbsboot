@@ -41,7 +41,7 @@ import static org.xmlpull.v1.XmlPullParser.*;
 public class OpenCbsDispatcher implements Dispatcher, ApplicationContextAware {
     private static final Logger logger = Logger.getLogger(OpenCbsDispatcher.class);
     Map<String, Flow> handlerMapping = new HashMap<String, Flow>();
-    @Value("${flow.scanBasePackege}")
+    @Value(value = "${flow.scanBasePackege}")
     private String scanBasePackege;
     private ApplicationContext context;
 

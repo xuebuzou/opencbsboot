@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.com.bocd.opencbs.dao.cif.FmClientPointDAO">
+<mapper namespace="cn.com.bocd.opencbsboot.dao.cif.FmClientPointDAO">
     <select id="selectClientTotalPointByClientNo" resultType="int">
         SELECT total_point AS totalPoint
         FROM symbols.fm_client_point
