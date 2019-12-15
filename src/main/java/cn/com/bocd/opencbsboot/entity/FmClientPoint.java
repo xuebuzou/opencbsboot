@@ -1,4 +1,4 @@
-package cn.com.bocd.opencbsboot.dto;
+package cn.com.bocd.opencbsboot.entity;
 
 import java.sql.Date;
 

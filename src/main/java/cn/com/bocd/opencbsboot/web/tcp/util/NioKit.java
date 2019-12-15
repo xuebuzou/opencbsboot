@@ -1,4 +1,4 @@
-package cn.com.bocd.opencbsboot.web.util;
+package cn.com.bocd.opencbsboot.web.tcp.util;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;

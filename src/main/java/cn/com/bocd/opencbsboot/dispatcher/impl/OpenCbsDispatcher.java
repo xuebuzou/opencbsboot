@@ -1,5 +1,6 @@
 package cn.com.bocd.opencbsboot.dispatcher.impl;
 
+import cn.com.bocd.opencbsboot.dispatcher.util.factory.FlowFactory;
 import cn.com.bocd.opencbsboot.tool.compositedata.helper.CDUtils;
 import cn.com.bocd.opencbsboot.tool.compositedata.helper.CompositeData;
 import cn.com.bocd.opencbsboot.tool.compositedata.helper.StringField;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.xmlpull.mxp1.MXParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -25,7 +27,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import static org.xmlpull.v1.XmlPullParser.*;
 
@@ -128,7 +132,7 @@ public class OpenCbsDispatcher implements Dispatcher, ApplicationContextAware {
 
     }
 
-//    @Transactional
+    //    @Transactional
     @Override
     public CompositeData doDispatch(CompositeData req) {
         CompositeData resp = CDUtils.getRespFromReq(req);
@@ -139,20 +143,31 @@ public class OpenCbsDispatcher implements Dispatcher, ApplicationContextAware {
             String msgtype = ((StringField) req.mGet("SYS_HEAD.MESSAGE_TYPE")).getValue();
             String msgcode = ((StringField) req.mGet("SYS_HEAD.MESSAGE_CODE")).getValue();
             String reqUrl = msgtype + "_" + msgcode + "_" + srctype;
-            Flow flow = handlerMapping.get(reqUrl);
+            Iterator<Entry<String, Flow>> it = handlerMapping.entrySet().iterator();
+            Flow flow = FlowFactory.getFlowInstance();
+            while (it.hasNext()) {
+                Entry<String, Flow> entry = it.next();
+                if ((StringUtils.countOccurrencesOf(entry.getKey(), srctype) > 0
+                        && StringUtils.countOccurrencesOf(entry.getKey(), msgtype) > 0
+                        && StringUtils.countOccurrencesOf(entry.getKey(), msgcode) > 0)) {
+                    flow = handlerMapping.get(entry.getKey());
+                    break;
+                }
+            }
             for (BizComponent component : flow.getComponents()) {
                 Object serviceObj = context.getBean(component.getService());
                 Method method = serviceObj.getClass().getMethod(component.getFunc(), CompositeData.class, CompositeData.class, CompositeData.class);
+                logger.info("开始执行组件 "+serviceObj.getClass().getSimpleName()+"."+method.getName()+"()");
                 method.invoke(serviceObj, req, data, resp);
             }
-        }catch (Exception e){
-            return doHandleException(resp,e);
+        } catch (Exception e) {
+            return doHandleException(resp, e);
         }
         CDUtils.setRespStatus(resp, "S", "000000", "Success");
         return resp;
     }
 
-    public CompositeData doHandleException(CompositeData resp,Exception e) {
+    public CompositeData doHandleException(CompositeData resp, Exception e) {
         if (e instanceof InvocationTargetException) {
             Throwable targetEx = ((InvocationTargetException) e).getTargetException();
             if (targetEx instanceof OpenCbsException) {
@@ -171,7 +186,7 @@ public class OpenCbsDispatcher implements Dispatcher, ApplicationContextAware {
                 }
             } else {
                 Throwable targetExCause = targetEx.getCause();
-                while(targetExCause != null){
+                while (targetExCause != null) {
                     targetEx = targetExCause;
                     targetExCause = targetEx.getCause();
                 }

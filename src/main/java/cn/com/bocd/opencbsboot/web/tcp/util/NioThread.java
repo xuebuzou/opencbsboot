@@ -1,10 +1,10 @@
-package cn.com.bocd.opencbsboot.web.util;
+package cn.com.bocd.opencbsboot.web.tcp.util;
 
 import cn.com.bocd.opencbsboot.tool.compositedata.handler.CDHandler;
 import cn.com.bocd.opencbsboot.exception.other.NoServiceFoundException;
 import cn.com.bocd.opencbsboot.exception.other.NullResponseException;
-import cn.com.bocd.opencbsboot.web.util.session.Session;
-import cn.com.bocd.opencbsboot.web.util.session.SessionDef;
+import cn.com.bocd.opencbsboot.web.tcp.util.session.Session;
+import cn.com.bocd.opencbsboot.web.tcp.util.session.SessionDef;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;

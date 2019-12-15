@@ -2,9 +2,10 @@ package cn.com.bocd.opencbsboot.test;
 
 import cn.com.bocd.opencbsboot.tool.compositedata.helper.CDUtils;
 import cn.com.bocd.opencbsboot.tool.compositedata.helper.CompositeData;
-import cn.com.bocd.opencbsboot.web.util.rpc.impl.ESBBoundTransformer;
+import cn.com.bocd.opencbsboot.web.tcp.util.rpc.impl.ESBBoundTransformer;
 import org.apache.log4j.Logger;
 import org.junit.Test;
+import org.springframework.util.StringUtils;
 
 
 import java.io.File;
@@ -29,5 +30,10 @@ public class SpringBootTest {
         CompositeData cdExcepted = transformer.byte2CompositeData(resp);
         logger.info("返回报文:\n" + CDUtils.toXml(cdExcepted, true));
         s.close();
+    }
+
+    @Test
+    public void testOthers(){
+
     }
 }

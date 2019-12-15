@@ -1,4 +1,4 @@
-package cn.com.bocd.opencbsboot.dto;
+package cn.com.bocd.opencbsboot.entity;
 
 public class Result<T> {
 

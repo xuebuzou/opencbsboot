@@ -1,8 +1,8 @@
-package cn.com.bocd.opencbsboot.web.util;
+package cn.com.bocd.opencbsboot.web.tcp.util;
 
 //import cn.com.bocd.connection.tcp.handler.Service;
 
-import cn.com.bocd.opencbsboot.web.server.EsbServer;
+import cn.com.bocd.opencbsboot.web.tcp.TcpServer;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,7 +44,7 @@ public class NioThreadPoolFactoryBean implements FactoryBean<Executor> {
     }
 
     public static class RejectExecution implements RejectedExecutionHandler {
-        private static final Logger log = Logger.getLogger(EsbServer.class);
+        private static final Logger log = Logger.getLogger(TcpServer.class);
 
         @Override
         public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {

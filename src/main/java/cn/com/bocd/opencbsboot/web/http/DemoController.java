@@ -1,4 +1,4 @@
-package cn.com.bocd.opencbsboot.controller;
+package cn.com.bocd.opencbsboot.web.http;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

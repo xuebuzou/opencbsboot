@@ -1,4 +1,4 @@
-package cn.com.bocd.opencbsboot.web.util.session;
+package cn.com.bocd.opencbsboot.web.tcp.util.session;
 
 public enum SessionDef {
     REQUEST_REMOTE_ADDR, // 远端地址

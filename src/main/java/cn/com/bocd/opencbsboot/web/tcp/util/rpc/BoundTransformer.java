@@ -1,4 +1,4 @@
-package cn.com.bocd.opencbsboot.web.util.rpc;
+package cn.com.bocd.opencbsboot.web.tcp.util.rpc;
 
 
 import cn.com.bocd.opencbsboot.tool.compositedata.helper.CompositeData;

@@ -1,9 +1,9 @@
-package cn.com.bocd.opencbsboot.web.util.rpc.impl;
+package cn.com.bocd.opencbsboot.web.tcp.util.rpc.impl;
 
 
 import cn.com.bocd.opencbsboot.tool.compositedata.helper.CDUtils;
 import cn.com.bocd.opencbsboot.tool.compositedata.helper.CompositeData;
-import cn.com.bocd.opencbsboot.web.util.rpc.BoundTransformer;
+import cn.com.bocd.opencbsboot.web.tcp.util.rpc.BoundTransformer;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;

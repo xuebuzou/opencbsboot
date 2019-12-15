@@ -1,8 +1,8 @@
-package cn.com.bocd.opencbsboot.web.server;
+package cn.com.bocd.opencbsboot.web.tcp;
 
 import cn.com.bocd.opencbsboot.tool.compositedata.handler.CDHandler;
-import cn.com.bocd.opencbsboot.web.util.NioSync;
-import cn.com.bocd.opencbsboot.web.util.NioThread;
+import cn.com.bocd.opencbsboot.web.tcp.util.NioSync;
+import cn.com.bocd.opencbsboot.web.tcp.util.NioThread;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
@@ -14,15 +14,15 @@ import java.io.UnsupportedEncodingException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
 
-public class EsbHandler extends ChannelInboundHandlerAdapter implements Runnable {
-    private static final Logger log = Logger.getLogger(EsbHandler.class);
+public class TcpHandler extends ChannelInboundHandlerAdapter implements Runnable {
+    private static final Logger log = Logger.getLogger(TcpHandler.class);
     protected Executor executor;
     private ByteBuf head;
     private ByteBuf body;
     private CDHandler cdHandler;
     private boolean flag; // 0: read head; 1: read body; else error;
 
-    public EsbHandler(Executor executor, CDHandler cdHandler) {
+    public TcpHandler(Executor executor, CDHandler cdHandler) {
         this.executor = executor;
         this.cdHandler = cdHandler;
         this.flag = true;

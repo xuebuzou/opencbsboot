@@ -1,4 +1,4 @@
-package cn.com.bocd.opencbsboot.web.server;
+package cn.com.bocd.opencbsboot.web.tcp;
 
 
 import cn.com.bocd.opencbsboot.tool.compositedata.handler.CDHandler;
@@ -21,8 +21,8 @@ import org.springframework.stereotype.Component;
 import java.util.concurrent.Executor;
 
 @Component
-public class EsbServer implements Runnable {
-    private static final Logger log = Logger.getLogger(EsbServer.class);
+public class TcpServer implements Runnable {
+    private static final Logger log = Logger.getLogger(TcpServer.class);
     @Value("${netty.server.listening.port}")
     private int port;
     @Autowired
@@ -36,10 +36,10 @@ public class EsbServer implements Runnable {
     @Value("${netty.server.listening.timeout}")
     private int timeout;
 
-    public EsbServer() {
+    public TcpServer() {
     }
 
-    public EsbServer(int port, int threadPoolSize, int timeout, Executor executor) {
+    public TcpServer(int port, int threadPoolSize, int timeout, Executor executor) {
         this.port = port;
         this.threadPoolSize = threadPoolSize;
         this.timeout = timeout;
@@ -103,8 +103,8 @@ public class EsbServer implements Runnable {
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         public void initChannel(SocketChannel ch) {
-                            ch.pipeline().addLast(new ReadTimeoutHandler(EsbServer.this.getTimeout()));
-                            ch.pipeline().addLast(new EsbHandler(executor, cdHandler));
+                            ch.pipeline().addLast(new ReadTimeoutHandler(TcpServer.this.getTimeout()));
+                            ch.pipeline().addLast(new TcpHandler(executor, cdHandler));
                         }
                     })
                     .option(ChannelOption.SO_BACKLOG, 128);
