@@ -31,9 +31,4 @@ public class SpringBootTest {
         logger.info("返回报文:\n" + CDUtils.toXml(cdExcepted, true));
         s.close();
     }
-
-    @Test
-    public void testOthers(){
-
-    }
 }
