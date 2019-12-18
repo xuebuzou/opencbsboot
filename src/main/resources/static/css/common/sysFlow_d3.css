@@ -1,0 +1,16 @@
+text {
+	font: 12px sans-serif;
+  	pointer-events: none;
+  	text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+	color: black;
+ 	font-weight: bold;
+}
+
+p{
+	margin:1px;
+}
+
+p > span{
+	font-weight:bold;
+}
+

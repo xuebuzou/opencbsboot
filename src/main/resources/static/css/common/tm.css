@@ -1,0 +1,74 @@
+.tm-form div{
+	margin-top:10px;
+	margin-left:15px;
+}
+.tm-form label{
+	width: 100px;
+    text-align:right;
+}
+.hidden{
+	display:none;
+}
+.activity_grid_span{
+	display:block; 
+	white-space:normal; 
+	word-break:break-all;
+}
+
+.activity_small_div{
+	height:55px;
+	width:98%;
+	margin:7px 0px;
+	background-color: rgb(182,224,228);
+	background-position: 35% 80%;
+}
+
+.activity_small_div ul{
+	margin:0px;
+	padding-left:20px;
+}
+
+.activity_small_div ul li{
+	text-overflow : clip;
+}
+
+.activity_small_div-1{
+	background-color: rgb(255,255,255);
+}
+
+.activity_small_div-2{
+	background-color: rgb(255,255,0);
+}
+
+.activity_small_div-3{
+	background-color: rgb(0,255,0);
+}
+
+.activity_small_div-4{
+	background-color: rgb(255,182,193);
+}
+
+/* 任务流程datagrid网格样式 */
+#activityFlowDlg .datagrid-header td,
+#activityFlowDlg .datagrid-body td,
+#activityFlowDlg .datagrid-footer td{
+	border:1px solid #777;
+	
+}
+/* 任务流程datagrid鼠标悬浮样式 */
+#activityFlowDlg .datagrid-row-over,
+#activityFlowDlg .datagrid-header td.datagrid-header-over {
+  background: #fff;
+  color: #000000;
+  cursor: default;
+}
+/* 任务流程datagrid选择样式 */
+#activityFlowDlg .datagrid-row-selected {
+  background: #fff;
+  color: #000000;
+} 
+
+#activityListDatagrid .datagrid-row-selected {
+  background: #fff;
+  color: #000000;
+}
