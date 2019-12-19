@@ -1,46 +1,48 @@
 $(function(){
-	var loginUser = JSON.parse(sessionStorage.getItem("user"));
-	$("#userName").text(loginUser.userName.split("-")[1]);
-	var adminFlag = loginUser.userRole.indexOf("1");
-	/*var roles = loginUser.userRole.split("|");
-	var userRolesTxt = "";
-	for (var i in roles){
-		userRolesTxt += getRefDesc(v_refType.USER_ROLE, roles[i])+"|";
-	}
-	$("#userRole").text(userRolesTxt.substring(0, userRolesTxt.length-1));*/
-	
-	$("#tm_quit_btn").click(function(){
-		$.post("user/quit", function(result){
-			sessionStorage.clear();
-			location.href="index2.html";
-		});
-	});
-	var userTypeParam;
-	if (loginUser.userType == "1"){
-		userTypeParam = "HF";
-	}else{
-		userTypeParam = "WB";
-	}
+	// var loginUser = JSON.parse(sessionStorage.getItem("user"));
+	// $("#userName").text(loginUser.userName.split("-")[1]);
+	// var adminFlag = loginUser.userRole.indexOf("1");
+	// /*var roles = loginUser.userRole.split("|");
+	// var userRolesTxt = "";
+	// for (var i in roles){
+	// 	userRolesTxt += getRefDesc(v_refType.USER_ROLE, roles[i])+"|";
+	// }
+	// $("#userRole").text(userRolesTxt.substring(0, userRolesTxt.length-1));*/
+	//
+	// $("#tm_quit_btn").click(function(){
+	// 	$.post("user/quit", function(result){
+	// 		sessionStorage.clear();
+	// 		location.href="index2.html";
+	// 	});
+	// });
+	// var userTypeParam;
+	// if (loginUser.userType == "1"){
+	// 	userTypeParam = "HF";
+	// }else{
+	// 	userTypeParam = "WB";
+	// }
 	$.ajax(
 		{
-			url:"menu/queryMenus",
-			type:"post",
-			data:{
-				"userType":userTypeParam
-			},
+			url:"data/menu1.json",
+			type:"get",
+			// data:{
+			// 	"userType":userTypeParam
+			// },
 			dataType:"json",
 			success:function(result){
+				console.info(result);
 				$("#menu").tree({
-					data:result.rows,
-					lines:true,
-					formatter:function(node){
-						return node.menuName;
-					},
+					data: result,
+					lines: true,
+					// 	formatter:function(node){
+					// 		return node.menuName;
+					// 	},
 					onClick:function(node){
-						addTabs(node.menuName, node.url);
+						addTabs(node.text, node.url);
 					}
+					// });
+					// addTabs(result.rows[0].menuName,result.rows[0].url);
 				});
-				addTabs(result.rows[0].menuName,result.rows[0].url);
 			}
 		}
 	);
