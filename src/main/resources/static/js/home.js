@@ -21,31 +21,26 @@ $(function(){
 	// }else{
 	// 	userTypeParam = "WB";
 	// }
+	console.info("before load menu");
 	$.ajax(
 		{
-			url:"data/menu1.json",
+			url:"data/menu_all.json",
 			type:"get",
-			// data:{
-			// 	"userType":userTypeParam
-			// },
 			dataType:"json",
 			success:function(result){
-				console.info(result);
+				console.info("sucess, result is ",result);
 				$("#menu").tree({
 					data: result,
 					lines: true,
-					// 	formatter:function(node){
-					// 		return node.menuName;
-					// 	},
 					onClick:function(node){
 						addTabs(node.text, node.url);
 					}
-					// });
-					// addTabs(result.rows[0].menuName,result.rows[0].url);
 				});
 			}
+
 		}
 	);
+	console.info("after load menu")
 });
 
 function addTabs(text, url){

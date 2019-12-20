@@ -18,10 +18,10 @@
 		</style>
 	</head>
 	<body id="pageLayout" class="easyui-layout" >
-		<div data-options="region:'north', border:false" style="height:3.5%">
-			<div class="easyui-panel" style="height:100% ; background-image: url(image/background.jpg)">
+		<div data-options="region:'north', border:false" style="height:6%">
+			<div class="easyui-panel" style="height:100% ; background-image: url(image/banner.jpg)">
 				<div style="float:left; font-family:Microsoft YaHei, Microsoft JhengHei, STHeiti, MingLiu">
-					<span style="line-height:60%; font-size:15px;">成都银行企业账户管理平台</span>
+					<span style="line-height:1px; font-size:100%; color:whitesmoke">成都银行企业账户管理平台</span>
 				</div>
 			</div>
 		</div>
@@ -31,12 +31,14 @@
 		<div data-options="region:'center'">
 			<div id="dataTabs" class="easyui-tabs" data-options="border:false, fit:true"></div>
 		</div>
-		<div data-options="region:'south',split:true" style="height: 3%;">
+		<div data-options="region:'south',split:true" style="height: 6%; background-image: url(image/foot.jpg)">
+
 			<a id="tm_quit_btn" href="javascript:void(0);" class="easyui-linkbutton"
 			   data-options="iconCls:'icon-back'" style="float:right">退出</a>
 			<div style="float:right; font-family:Microsoft YaHei, Microsoft JhengHei, STHeiti, MingLiu">
-				<span style="line-height:25px; font-size:15px;">当前登录：<b><span id="userName"></span></b></span>
+				<span style="line-height:25px; font-size:13px; color:whitesmoke">当前登录：<b><span id="userName"></span></b></span>
 			</div>
+
 		</div>
 		<div id="btns">
 			<a href="javascript:void(0)" id="btnsSave">提交</a>

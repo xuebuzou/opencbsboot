@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "text": "企业开户",
+    "children": [
+      {
+        "id": 11,
+        "text": "开户进度",
+        "url": "pages/module/m01.html"
+      },
+      {
+        "id": 12,
+        "text": "影像查阅"
+      },
+      {
+        "id": 13,
+        "text": "开户填单"
+      },
+      {
+        "id": 14,
+        "text": "日终对账"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "text": "账户管理",
+    "children": [
+      {
+        "id": 21,
+        "text": "数据统计",
+        "url": "pages/module/m01.html"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "text": "系统设置",
+    "children": [
+      {
+        "id": 31,
+        "text": "密码重置",
+        "url": "pages/module/m01.html"
+      }
+    ]
+  }
+]
