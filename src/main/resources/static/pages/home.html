@@ -18,17 +18,12 @@
 		</style>
 	</head>
 	<body id="pageLayout" class="easyui-layout" >
-		<div data-options="region:'north', border:false" style="height:5%;">
-<!--			<div class="easyui-panel" style="padding:3px; background-color:#2A94DE; color:#fff">-->
-<!--				<div style="float:left; font-family:Microsoft YaHei, Microsoft JhengHei, STHeiti, MingLiu">-->
-<!--					<span style="line-height:25px; font-size:15px;">成都银行企业账户管理平台</span>-->
-<!--				</div>-->
-<!--				<a id="tm_quit_btn" href="javascript:void(0);" class="easyui-linkbutton" -->
-<!--						data-options="iconCls:'icon-back'" style="float:right">退出</a>-->
-<!--				<div style="float:right; font-family:Microsoft YaHei, Microsoft JhengHei, STHeiti, MingLiu">-->
-<!--					<span style="line-height:25px; font-size:15px;">当前登录：<b><span id="userName"></span></b></span>-->
-<!--				</div>-->
-<!--			</div>-->
+		<div data-options="region:'north', border:false" style="height:3.5%">
+			<div class="easyui-panel" style="height:100% ; background-image: url(image/background.jpg)">
+				<div style="float:left; font-family:Microsoft YaHei, Microsoft JhengHei, STHeiti, MingLiu">
+					<span style="line-height:60%; font-size:15px;">成都银行企业账户管理平台</span>
+				</div>
+			</div>
 		</div>
 		<div data-options="region:'west', split:true" style="width:15%;" title="菜单">
 			<div id="menu" class="easyui-accordion" data-options="fit:true, border:false"></div>
@@ -36,16 +31,17 @@
 		<div data-options="region:'center'">
 			<div id="dataTabs" class="easyui-tabs" data-options="border:false, fit:true"></div>
 		</div>
-		<div data-options="region:'south',split:true" style="height: 3%;"></div>
-<!--		<div data-options="region:'east',split:true" title="通知" style="width:100px;"></div>-->
-		
-		<!-- 按钮栏 -->
+		<div data-options="region:'south',split:true" style="height: 3%;">
+			<a id="tm_quit_btn" href="javascript:void(0);" class="easyui-linkbutton"
+			   data-options="iconCls:'icon-back'" style="float:right">退出</a>
+			<div style="float:right; font-family:Microsoft YaHei, Microsoft JhengHei, STHeiti, MingLiu">
+				<span style="line-height:25px; font-size:15px;">当前登录：<b><span id="userName"></span></b></span>
+			</div>
+		</div>
 		<div id="btns">
 			<a href="javascript:void(0)" id="btnsSave">提交</a>
 			<a href="javascript:void(0)" id="btnsClose">关闭</a>
 		</div>
-		
-		<!-- 按钮栏2 -->
 		<div id="btns2">
 			<a href="javascript:void(0)" id="btnsSave2">提交</a>
 			<a href="javascript:void(0)" id="btnsClose2">关闭</a>
