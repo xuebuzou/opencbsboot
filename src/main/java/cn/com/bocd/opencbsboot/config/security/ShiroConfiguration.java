@@ -80,14 +80,16 @@ public class ShiroConfiguration {
 	@Bean(name = "shiroFilter")
 	public ShiroFilterFactoryBean shiroFilterFactoryBean(@Qualifier("securityManager") DefaultWebSecurityManager manager) {
 		ShiroFilterFactoryBean sfilterBean = new ShiroFilterFactoryBean();
-		//设置安全管理器
 		sfilterBean.setSecurityManager(securityManager());
-		//设置默认登录的URL，身份认证失败会访问该 URL
 		sfilterBean.setLoginUrl("/index");
-		//认证成功跳转
 		sfilterBean.setSuccessUrl("/home");
 		//权限认证失败跳转
 		sfilterBean.setUnauthorizedUrl("/unauthorized");
+
+		//解决登陆后无法跳转的问题
+		Map map = new LinkedHashMap();
+		map.put("authc",new MyFormAuthenticationFilter());
+		sfilterBean.setFilters(map);
 
 		//顺序拦截器
 		LinkedHashMap<String, String> filterChainDefinitionMap=new LinkedHashMap<>();

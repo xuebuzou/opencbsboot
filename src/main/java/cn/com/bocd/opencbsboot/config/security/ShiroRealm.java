@@ -55,8 +55,7 @@ public class ShiroRealm extends AuthorizingRealm {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         String userName=token.getUsername();
         logger.info(userName+token.getPassword());
-
-        User user = userService.getByUserName(token.getUsername());
+        User user = userService.getByUserName(userName);
         if (user != null) {
 //            byte[] salt = Encodes.decodeHex(user.getSalt());
 //            ShiroUser shiroUser=new ShiroUser(user.getId(), user.getLoginName(), user.getName());

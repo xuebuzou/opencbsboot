@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
@@ -19,7 +20,8 @@ public class IndexController {
         return "index";
     }
 
-    @RequestMapping(value = "/doLogin", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ResponseBody
     public String login(
             @RequestParam(value = "username", required = true) String userName,
             @RequestParam(value = "password", required = true) String password,
@@ -32,9 +34,12 @@ public class IndexController {
             subject.login(token);
         } catch (AuthenticationException e) {
             e.printStackTrace();
-            return "{\"Msg\":\"您的账号或密码输入错误\",\"state\":\"failed\"}";
         }
-        return "{\"Msg\":\"登陆成功\",\"state\":\"success\"}";
+        if(subject.isAuthenticated()){
+            logger.info("认证成功");
+            return "success";
+        }
+        return null;
     }
 
 }

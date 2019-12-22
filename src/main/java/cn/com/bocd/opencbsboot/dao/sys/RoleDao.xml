@@ -28,19 +28,19 @@
     </sql>
     	
     <select id="getByMap" parameterType="map" resultMap="roleMap">
-    	SELECT * FROM role
+    	SELECT * FROM t_ocbs_role
 		<include refid="queryCondition" />
     </select>
     
     <select id="getById" parameterType="int" resultMap="roleMap">
-    	SELECT * FROM role WHERE id =#{id}
+    	SELECT * FROM t_ocbs_role WHERE id =#{id}
     </select>
     
     <insert id="create" parameterType="cn.com.bocd.opencbsboot.entity.sys.Role">
         <selectKey resultType="int"  order="AFTER" keyProperty="id" >
 			SELECT LAST_INSERT_ID()
 		</selectKey>
-		INSERT INTO role(
+		INSERT INTO t_ocbs_role(
 			id,
 			name,
 			role_level,
@@ -54,7 +54,7 @@
     </insert>
     
     <update id="update" parameterType="cn.com.bocd.opencbsboot.entity.sys.Role">
-		UPDATE role SET
+		UPDATE t_ocbs_role SET
 			name = #{name},
 			role_level = #{roleLevel},
 			description = #{description}
@@ -62,7 +62,7 @@
     </update>
     
     <delete id="delete" parameterType="int">
-    	DELETE FROM role WHERE id = #{id}
+    	DELETE FROM t_ocbs_role WHERE id = #{id}
     </delete>
     
 </mapper>
