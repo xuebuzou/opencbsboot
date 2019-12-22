@@ -1,4 +1,4 @@
-package cn.com.bocd.opencbsboot.config;
+package cn.com.bocd.opencbsboot.config.database;
 
 import com.alibaba.druid.support.http.StatViewServlet;
 

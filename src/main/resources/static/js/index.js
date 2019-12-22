@@ -30,7 +30,7 @@ $(function(){
 				userPwd:userPwd
 		};
 		$.ajax({
-			url : "user/login",
+			url : "/login",
 			type : "post",
 			dataType : "json",
 			async : false,
