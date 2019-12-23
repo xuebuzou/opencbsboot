@@ -3,13 +3,14 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Login</title>
-	<script src="../js/index.js"></script>
+	<script src="../js/common/jquery.min.js"></script>
+	<script src="../js/login.js"></script>
 </head>
 <body>
-<form action="/login" method="post">
-	<p>账号：<input type="text" name="username" value=""/></p>
-	<p>密码：<input type="text" name="password" value=""/></p>
-	<p><input type="submit" value="登录"/></p>
+<form>
+	<p>账号：<input id="username" type="text" name="username"/></p>
+	<p>密码：<input id="password" type="text" name="password"/></p>
+	<p><button onclick="login()">登录</button></p>
 </form>
 </body>
 </html>
