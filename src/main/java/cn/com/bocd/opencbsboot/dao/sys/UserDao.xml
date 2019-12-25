@@ -68,13 +68,13 @@
     </sql>
 
     <select id="getByMap" parameterType="map" resultMap="userMap">
-        SELECT * FROM t_ocbs_user
+        SELECT * FROM ZG_USER
         <include refid="queryCondition"/>
     </select>
 
     <select id="getById" parameterType="int" resultMap="userMap">
         SELECT *
-        FROM t_ocbs_user
+        FROM ZG_USER
         WHERE id = #{id}
     </select>
 
@@ -90,7 +90,7 @@
              , SKILL         skill
              , DEPARTMENT_ID departmentId
              , LOGIN_COUNT   loginCount
-        from t_ocbs_user
+        from ZG_USER
         where username = #{userName}
     </select>
 
@@ -98,7 +98,7 @@
         <selectKey resultType="int" order="AFTER" keyProperty="id">
             SELECT LAST_INSERT_ID()
         </selectKey>
-        INSERT INTO t_ocbs_user(
+        INSERT INTO ZG_USER(
         id,
         cnname,
         username,
@@ -126,7 +126,7 @@
     </insert>
 
     <update id="update" parameterType="cn.com.bocd.opencbsboot.entity.sys.User">
-        UPDATE t_ocbs_user
+        UPDATE ZG_USER
         SET cnname        = #{cnname},
             username      = #{username},
             password      = #{password},
@@ -142,7 +142,7 @@
 
     <delete id="delete" parameterType="int">
         DELETE
-        FROM t_ocbs_user
+        FROM ZG_USER
         WHERE id = #{id}
     </delete>
 

@@ -46,9 +46,9 @@
 
 	<select id="getByUserId" parameterType="int" resultMap="permissionMap">
 		select p.*
-		from t_ocbs_user u
-		LEFT JOIN t_ocbs_user_role ur on u.id= ur.User_id
-		LEFT JOIN t_ocbs_role r on ur.role_id=r.id
+		from ZG_USER u
+		LEFT JOIN ZG_USER_ROLE ur on u.id= ur.User_id
+		LEFT JOIN ZG_ROLE r on ur.role_id=r.id
 		LEFT JOIN role_permission rp on rp.role_id=r.id
 		LEFT JOIN permission p on p.id =rp.permission_id
 		where u.id=#{userId}
