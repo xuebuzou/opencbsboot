@@ -1,1 +1,0 @@
-INSERT INTO sys_user_role (role_id,USER_ID) VALUES (1,1);
