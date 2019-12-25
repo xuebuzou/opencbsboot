@@ -19,7 +19,13 @@ public class IndexController {
         return "index";
     }
 
-    @GetMapping("/home")
+    @GetMapping("/zg")
+    public String index2() {
+        logger.info("render index2");
+        return "index2";
+    }
+
+    @GetMapping("/zg/home")
     public String home() {
         logger.info("render home");
         return "home";

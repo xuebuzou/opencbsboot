@@ -81,8 +81,8 @@ public class ShiroConfiguration {
 	public ShiroFilterFactoryBean shiroFilterFactoryBean(@Qualifier("securityManager") DefaultWebSecurityManager manager) {
 		ShiroFilterFactoryBean sfilterBean = new ShiroFilterFactoryBean();
 		sfilterBean.setSecurityManager(securityManager());
-		sfilterBean.setLoginUrl("/index");
-		sfilterBean.setSuccessUrl("/home");
+		sfilterBean.setLoginUrl("/zg");
+		sfilterBean.setSuccessUrl("/zg/home");
 		//权限认证失败跳转
 		sfilterBean.setUnauthorizedUrl("/403");
 
@@ -94,14 +94,14 @@ public class ShiroConfiguration {
 		//顺序拦截器
 		LinkedHashMap<String, String> filterChainDefinitionMap=new LinkedHashMap<>();
 		//设置匿名访问
-		filterChainDefinitionMap.put("/login", "anon");
+		filterChainDefinitionMap.put("/zg", "anon");
 		filterChainDefinitionMap.put("/static/js/*", "anon");
 		filterChainDefinitionMap.put("/static/assets/*", "anon");
 		filterChainDefinitionMap.put("/static/css/*", "anon");
 		filterChainDefinitionMap.put("/static/data/*", "anon");
 		filterChainDefinitionMap.put("/static/image/*", "anon");
 		//设置user,role,permission认证
-		filterChainDefinitionMap.put("/home", "authc");
+		filterChainDefinitionMap.put("/zg/home", "authc");
 
 		//设置logout
 		filterChainDefinitionMap.put("/logout", "logout");
