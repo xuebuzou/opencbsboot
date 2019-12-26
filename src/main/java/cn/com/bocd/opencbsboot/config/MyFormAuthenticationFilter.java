@@ -1,4 +1,4 @@
-package cn.com.bocd.opencbsboot.config.security;
+package cn.com.bocd.opencbsboot.config;
 
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.subject.Subject;
