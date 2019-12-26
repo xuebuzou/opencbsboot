@@ -1,6 +1,0 @@
-<flows>
-    <flow msgType="1400" msgCode="9009" srcType="CB|MT|AT" desc="查询客户积分">
-        <component type="check" service="CifPointCheckService" func="isClientSign" desc="检查客编是否签约了积分业务"></component>
-        <component type="biz" service="CifPointBizService" func="queryCifPointById" desc="根据客编查询客户存款积分或综合积分"></component>
-    </flow>
-</flows>

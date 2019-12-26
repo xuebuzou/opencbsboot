@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.xmlpull.mxp1.MXParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -132,7 +133,7 @@ public class OpenCbsDispatcher implements Dispatcher, ApplicationContextAware {
 
     }
 
-    //    @Transactional
+    @Transactional
     @Override
     public CompositeData doDispatch(CompositeData req) {
         CompositeData resp = CDUtils.getRespFromReq(req);
@@ -157,7 +158,6 @@ public class OpenCbsDispatcher implements Dispatcher, ApplicationContextAware {
             for (BizComponent component : flow.getComponents()) {
                 Object serviceObj = context.getBean(component.getService());
                 Method method = serviceObj.getClass().getMethod(component.getFunc(), CompositeData.class, CompositeData.class, CompositeData.class);
-                logger.info("开始执行组件 "+serviceObj.getClass().getSimpleName()+"."+method.getName()+"()");
                 method.invoke(serviceObj, req, data, resp);
             }
         } catch (Exception e) {

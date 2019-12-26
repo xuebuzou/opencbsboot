@@ -1,0 +1,10 @@
+<flows>
+    <flow msgType="1400" msgCode="9009" srcType="CB|MT|AT" desc="查询客户积分">
+        <parallel>
+            <component type="check" service="CommonCheckService" func="checkTranDate" desc="检查交易日期"></component>
+            <component type="check" service="CifPointCheckService" func="isClientSign" desc="检查客编是否签约了积分业务"></component>
+        </parallel>
+        <component type="biz" service="CifPointBizService" func="queryCifPointById" desc="根据客编查询客户存款积分或综合积分"></component>
+        <async-component type="biz" service="CommonBizService" func="sendPhoneMsg" desc="发送短信"></async-component>
+    </flow>
+</flows>

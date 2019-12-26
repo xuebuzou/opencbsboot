@@ -3,7 +3,6 @@ package cn.com.bocd.opencbsboot;
 import cn.com.bocd.opencbsboot.web.tcp.TcpServer;
 import org.apache.log4j.Logger;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.ApplicationContext;
@@ -16,6 +15,6 @@ public class OpencbsbootApplication {
         ApplicationContext context = SpringApplication.run(OpencbsbootApplication.class, args);
         Thread t = new Thread(context.getBean(TcpServer.class));
         t.start();
-        logger.info("opencbsboot服务已启动...");
+        logger.info("server started...");
     }
 }

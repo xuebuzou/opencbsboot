@@ -13,21 +13,13 @@ import org.springframework.web.bind.annotation.*;
 public class IndexController {
     private static final Logger logger = Logger.getLogger(IndexController.class);
 
-    @GetMapping("/index")
-    public String index() {
-        logger.info("render index");
-        return "index";
-    }
-
     @GetMapping("/zg")
     public String index2() {
-        logger.info("render index2");
         return "index2";
     }
 
     @GetMapping("/zg/home")
     public String home() {
-        logger.info("render home");
         return "home";
     }
 
@@ -49,6 +41,5 @@ public class IndexController {
             return ResponseBo.error("认证失败！");
         }
     }
-//        return ResponseBo.ok();
-    }
+}
 
