@@ -5,16 +5,8 @@
     "children": [
       {
         "id": 11,
-        "text": "开户进度",
-        "url": "pages/module/m01.html"
-      },
-      {
-        "id": 12,
-        "text": "影像查阅"
-      },
-      {
-        "id": 13,
-        "text": "开户填单"
+        "text": "开户流程",
+        "url": "/zg/home/openacct"
       },
       {
         "id": 14,
@@ -29,18 +21,28 @@
       {
         "id": 21,
         "text": "数据统计",
-        "url": "pages/module/m01.html"
+        "url": ""
       }
     ]
   },
   {
     "id": 3,
-    "text": "系统设置",
+    "text": "系统功能",
     "children": [
       {
         "id": 31,
+        "text": "用户管理",
+        "url": ""
+      },
+      {
+        "id": 32,
         "text": "密码重置",
-        "url": "pages/module/m01.html"
+        "url": ""
+      },
+      {
+        "id": 33,
+        "text": "退出登陆",
+        "url": ""
       }
     ]
   }

@@ -78,19 +78,34 @@
         WHERE id = #{id}
     </select>
 
-    <select id="getByUserName" parameterType="String" resultType="cn.com.bocd.opencbsboot.entity.sys.User">
-        select ID            id
-             , CNNAME        cnname
-             , USERNAME      username
-             , PASSWORD      password
-             , email         email
-             , TELEPHONE     telephone
-             , MOBILE_PHONE  mobilePhone
-             , WECHAT_ID     wechatId
-             , SKILL         skill
-             , DEPARTMENT_ID departmentId
-             , LOGIN_COUNT   loginCount
-        from ZG_USER
+    <resultMap type="cn.com.bocd.opencbsboot.entity.sys.User" id="UserAndRulesResultMap">
+        <id column="user_id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="cnname" property="cnname"/>
+        <result column="password" property="password"/>
+        <collection property="roles" ofType="cn.com.bocd.opencbsboot.entity.sys.Role">
+            <id column="role_id" property="id"/>
+            <result column="role_name" property="name"/>
+        </collection>
+    </resultMap>
+
+    <select id="getByUserName" parameterType="String" resultMap="UserAndRulesResultMap">
+        select a.ID            user_id
+             , a.CNNAME        cnname
+             , a.USERNAME      username
+             , a.PASSWORD      password
+             , a.email         email
+             , a.TELEPHONE     telephone
+             , a.MOBILE_PHONE  mobilePhone
+             , a.WECHAT_ID     wechatId
+             , a.SKILL         skill
+             , a.DEPARTMENT_ID departmentId
+             , a.LOGIN_COUNT   loginCount
+             , c.ID          role_id
+             , c.NAME        role_name
+        from ZG_USER a
+                 inner join ZG_USER_ROLE b on a.ID = b.USER_ID
+                 inner join ZG_ROLE c on b.ROLE_ID = c.ID
         where username = #{userName}
     </select>
 

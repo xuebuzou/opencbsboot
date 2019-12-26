@@ -9,7 +9,7 @@ create table ZG_ROLE
 )
 /
 
-
+INSERT INTO SYMBOLS.ZG_ROLE (ID, NAME, ROLE_LEVEL, DESCRIPTION) VALUES (1, 'admin', null, '系统管理员');
 create table ZG_USER
 (
     ID            NUMBER not null
@@ -38,3 +38,4 @@ create table ZG_USER_ROLE
 )
 /
 
+INSERT INTO SYMBOLS.ZG_USER_ROLE (USER_ID, ROLE_ID) VALUES (1, 1);

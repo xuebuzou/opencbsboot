@@ -54,26 +54,22 @@ public class ShiroConfiguration {
 		sfilterBean.setSecurityManager(securityManager());
 		sfilterBean.setLoginUrl("/zg");
 		sfilterBean.setSuccessUrl("/zg/home");
-		sfilterBean.setUnauthorizedUrl("/403");
+		sfilterBean.setUnauthorizedUrl("/unAuthorized");
 
 		Map map = new LinkedHashMap();
 		map.put("authc",new MyFormAuthenticationFilter());
 		sfilterBean.setFilters(map);
 
-
 		LinkedHashMap<String, String> filterChainDefinitionMap=new LinkedHashMap<>();
-
 		filterChainDefinitionMap.put("/zg", "anon");
 		filterChainDefinitionMap.put("/static/js/*", "anon");
 		filterChainDefinitionMap.put("/static/assets/*", "anon");
 		filterChainDefinitionMap.put("/static/css/*", "anon");
 		filterChainDefinitionMap.put("/static/data/*", "anon");
 		filterChainDefinitionMap.put("/static/image/*", "anon");
-
 		filterChainDefinitionMap.put("/zg/home", "authc");
-
+		filterChainDefinitionMap.put("/zg/home/openacct*", "authc,roles[admin1]");
 		filterChainDefinitionMap.put("/logout", "logout");
-
 		sfilterBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 		return sfilterBean;
 	}

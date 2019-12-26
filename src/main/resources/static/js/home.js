@@ -21,14 +21,12 @@ $(function(){
 	// }else{
 	// 	userTypeParam = "WB";
 	// }
-	console.info("before load menu");
 	$.ajax(
 		{
-			url:"data/menu_all.json",
+			url:"/data/menu_all.json",
 			type:"get",
 			dataType:"json",
 			success:function(result){
-				console.info("sucess, result is ",result);
 				$("#menu").tree({
 					data: result,
 					lines: true,
@@ -40,7 +38,6 @@ $(function(){
 
 		}
 	);
-	console.info("after load menu")
 });
 
 function addTabs(text, url){

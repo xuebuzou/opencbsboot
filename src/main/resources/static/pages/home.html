@@ -18,27 +18,20 @@
 		</style>
 	</head>
 	<body id="pageLayout" class="easyui-layout" >
-		<div data-options="region:'north', border:false" style="height:6%">
-			<div class="easyui-panel" style="height:100% ; background-image: url(image/banner.jpg)">
-				<div style="float:left; font-family:Microsoft YaHei, Microsoft JhengHei, STHeiti, MingLiu">
-					<span style="line-height:1px; font-size:100%; color:whitesmoke">成都银行企业账户管理平台</span>
+		<div data-options="region:'north', border:false" style="height:40px">
+			<div class="easyui-panel" style="height:100% ; background-image: url(/image/banner.jpg)">
+				<div style="float:left;height: 100%;font-family:Microsoft YaHei, Microsoft JhengHei, STHeiti, MingLiu">
+					<div style="font-size:25px; color:whitesmoke">成都银行企业账户管理平台</div>
 				</div>
 			</div>
 		</div>
-		<div data-options="region:'west', split:true" style="width:15%;" title="菜单">
+		<div data-options="region:'west', split:true" style="width:160px;" title="菜单">
 			<div id="menu" class="easyui-accordion" data-options="fit:true, border:false"></div>
 		</div>
 		<div data-options="region:'center'">
 			<div id="dataTabs" class="easyui-tabs" data-options="border:false, fit:true"></div>
 		</div>
-		<div data-options="region:'south',split:true" style="height: 6%; background-image: url(image/foot.jpg)">
-
-			<a id="tm_quit_btn" href="javascript:void(0);" class="easyui-linkbutton"
-			   data-options="iconCls:'icon-back'" style="float:right">退出</a>
-			<div style="float:right; font-family:Microsoft YaHei, Microsoft JhengHei, STHeiti, MingLiu">
-				<span style="line-height:25px; font-size:13px; color:whitesmoke">当前登录：<b><span id="userName"></span></b></span>
-			</div>
-
+		<div data-options="region:'south', border:false" style="height: 25px; background-image: url(/image/banner.jpg)">
 		</div>
 		<div id="btns">
 			<a href="javascript:void(0)" id="btnsSave">提交</a>

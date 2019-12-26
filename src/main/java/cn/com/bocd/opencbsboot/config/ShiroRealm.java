@@ -25,28 +25,26 @@ public class ShiroRealm extends AuthorizingRealm {
     private PermissionDao permissionService;
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+        logger.info("doGetAuthorizationInfo:"+principalCollection.toString());
         User user = userService.getByUserName((String) principalCollection.getPrimaryPrincipal());
-        SecurityUtils.getSubject().getSession().setAttribute(String.valueOf(user.getId()), SecurityUtils.getSubject().getPrincipals());
-        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         for(Role userRole:user.getRoles()){
-            info.addRole(userRole.getName());
+            authorizationInfo.addRole(userRole.getName());
         }
-        for(Permission permission:permissionService.getByUserId(user.getId())){
-                info.addStringPermission(permission.getName());
-        }
-        return info;
+        return authorizationInfo;
     }
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+        logger.info("doGetAuthenticationInfo:"+authenticationToken.toString());
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         String userName=token.getUsername();
-        logger.info(userName+token.getPassword());
         User user = userService.getByUserName(userName);
         if (user != null) {
             Session session = SecurityUtils.getSubject().getSession();
             session.setAttribute("user", user);
-            return new SimpleAuthenticationInfo(userName,user.getPassword(),getName());
+            String name = getName();
+            return new SimpleAuthenticationInfo(userName,user.getPassword(),name);
         } else {
             return null;
         }
