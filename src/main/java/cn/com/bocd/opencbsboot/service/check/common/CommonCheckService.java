@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service("CommonCheckService")
 public class CommonCheckService implements CifCheckService{
-//    @Autowired
-//    private FmClientPointDAO fmClientPointDAO;
+
     public void checkTranDate(CompositeData req, CompositeData data, CompositeData resp) throws Exception{
     }
 }

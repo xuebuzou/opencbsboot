@@ -34,11 +34,6 @@ import java.util.Map.Entry;
 
 import static org.xmlpull.v1.XmlPullParser.*;
 
-/**
- * @创建人 chengke
- * @创建时间 2019/11/29
- * @描述 调度器实现类
- */
 @Component("openCbsDispatcher")
 public class OpenCbsDispatcher implements Dispatcher, ApplicationContextAware {
     private static final Logger logger = Logger.getLogger(OpenCbsDispatcher.class);
