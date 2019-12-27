@@ -24,7 +24,6 @@ public class ShiroRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        logger.info("doGetAuthorizationInfo:"+principalCollection.toString());
         User user = userService.getByUserName((String) principalCollection.getPrimaryPrincipal());
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         for(Role userRole:user.getRoles()){
@@ -35,7 +34,6 @@ public class ShiroRealm extends AuthorizingRealm {
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        logger.info("doGetAuthenticationInfo:"+authenticationToken.toString());
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         String userName=token.getUsername();
         User user = userService.getByUserName(userName);
