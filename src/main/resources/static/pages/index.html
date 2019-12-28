@@ -33,7 +33,7 @@
         var username = $("#username").val();
         var password = $("#password").val();
         if (username == "" || password == "") {
-            window.alert("用户名和密码不能为空")
+            window.alert("用户名和密码不能为空");
             return;
         }
         $.ajax({
@@ -43,7 +43,6 @@
             async: false,
             data: {"username": username, "password": password},
             success: function (result) {
-                console.info(result);
                 if (result.msg == "success") {
                     // sessionStorage.setItem("user", JSON.stringify(result.data));
                     location.href = "zg/home";
