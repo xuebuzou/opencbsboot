@@ -2,7 +2,7 @@ package cn.com.bocd.opencbsboot.web.tcp.util;
 
 //import cn.com.bocd.connection.tcp.handler.Service;
 
-import cn.com.bocd.opencbsboot.web.tcp.TcpServer;
+import cn.com.bocd.opencbsboot.web.tcp.NettyServer;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,7 +26,7 @@ public class NioThreadPoolFactoryBean implements FactoryBean<Executor> {
     }
 
     @Override
-    public Executor getObject() throws Exception {
+    public Executor getObject() {
         BlockingQueue<Runnable> queue = new ArrayBlockingQueue<>(queueSize);
         NioQueueHolder.setQueue(queue);
         return new ThreadPoolExecutor(corePoolSize, corePoolSize, 0, TimeUnit.NANOSECONDS, queue, new RejectExecution());
@@ -44,7 +44,7 @@ public class NioThreadPoolFactoryBean implements FactoryBean<Executor> {
     }
 
     public static class RejectExecution implements RejectedExecutionHandler {
-        private static final Logger log = Logger.getLogger(TcpServer.class);
+        private static final Logger log = Logger.getLogger(NettyServer.class);
 
         @Override
         public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {

@@ -14,15 +14,15 @@ import java.io.UnsupportedEncodingException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
 
-public class TcpHandler extends ChannelInboundHandlerAdapter implements Runnable {
-    private static final Logger log = Logger.getLogger(TcpHandler.class);
+public class NettyHandler extends ChannelInboundHandlerAdapter implements Runnable {
+    private static final Logger log = Logger.getLogger(NettyHandler.class);
     protected Executor executor;
     private ByteBuf head;
     private ByteBuf body;
     private CDHandler cdHandler;
     private boolean flag; // 0: read head; 1: read body; else error;
 
-    public TcpHandler(Executor executor, CDHandler cdHandler) {
+    public NettyHandler(Executor executor, CDHandler cdHandler) {
         this.executor = executor;
         this.cdHandler = cdHandler;
         this.flag = true;

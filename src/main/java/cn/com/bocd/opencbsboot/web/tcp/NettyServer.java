@@ -21,8 +21,8 @@ import org.springframework.stereotype.Component;
 import java.util.concurrent.Executor;
 
 @Component
-public class TcpServer implements Runnable {
-    private static final Logger log = Logger.getLogger(TcpServer.class);
+public class NettyServer implements Runnable {
+    private static final Logger log = Logger.getLogger(NettyServer.class);
     @Value("${netty.server.listening.port}")
     private int port;
     @Autowired
@@ -36,10 +36,10 @@ public class TcpServer implements Runnable {
     @Value("${netty.server.listening.timeout}")
     private int timeout;
 
-    public TcpServer() {
+    public NettyServer() {
     }
 
-    public TcpServer(int port, int threadPoolSize, int timeout, Executor executor) {
+    public NettyServer(int port, int threadPoolSize, int timeout, Executor executor) {
         this.port = port;
         this.threadPoolSize = threadPoolSize;
         this.timeout = timeout;
@@ -103,8 +103,8 @@ public class TcpServer implements Runnable {
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         public void initChannel(SocketChannel ch) {
-                            ch.pipeline().addLast(new ReadTimeoutHandler(TcpServer.this.getTimeout()));
-                            ch.pipeline().addLast(new TcpHandler(executor, cdHandler));
+                            ch.pipeline().addLast(new ReadTimeoutHandler(NettyServer.this.getTimeout()));
+                            ch.pipeline().addLast(new NettyHandler(executor, cdHandler));
                         }
                     })
                     .option(ChannelOption.SO_BACKLOG, 128);
