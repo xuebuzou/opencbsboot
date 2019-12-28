@@ -83,9 +83,11 @@
         <result column="username" property="username"/>
         <result column="cnname" property="cnname"/>
         <result column="password" property="password"/>
+        <result column="departmentId" property="departmentId"/>
         <collection property="roles" ofType="cn.com.bocd.opencbsboot.entity.sys.Role">
             <id column="role_id" property="id"/>
             <result column="role_name" property="name"/>
+            <result column="role_desc" property="description"/>
         </collection>
     </resultMap>
 
@@ -103,6 +105,7 @@
              , a.LOGIN_COUNT   loginCount
              , c.ID          role_id
              , c.NAME        role_name
+             , c.DESCRIPTION   role_desc
         from ZG_USER a
                  inner join ZG_USER_ROLE b on a.ID = b.USER_ID
                  inner join ZG_ROLE c on b.ROLE_ID = c.ID

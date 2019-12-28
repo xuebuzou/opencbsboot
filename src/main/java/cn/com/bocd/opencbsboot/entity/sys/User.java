@@ -16,7 +16,7 @@ public class User {
     private String mobilePhone;
     private String wechatId;
     private String skill;
-    private Integer departmentId;
+    private String departmentId;
     private Integer loginCount;
 
     private List<Role> roles;
@@ -89,11 +89,11 @@ public class User {
         this.skill = skill;
     }
 
-    public Integer getDepartmentId() {
+    public String getDepartmentId() {
         return departmentId;
     }
 
-    public void setDepartmentId(Integer departmentId) {
+    public void setDepartmentId(String departmentId) {
         this.departmentId = departmentId;
     }
 
