@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ShiroRealm extends AuthorizingRealm {
-    private Logger logger =  LoggerFactory.getLogger(this.getClass());
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private UserDao userService;
@@ -26,7 +26,7 @@ public class ShiroRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         User user = userService.getByUserName((String) principalCollection.getPrimaryPrincipal());
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        for(Role userRole:user.getRoles()){
+        for (Role userRole : user.getRoles()) {
             authorizationInfo.addRole(userRole.getName());
         }
         return authorizationInfo;
@@ -35,16 +35,20 @@ public class ShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-        String userName=token.getUsername();
+        String userName = token.getUsername();
+        String password = new String((char[]) token.getCredentials());
         User user = userService.getByUserName(userName);
-        if (user != null) {
-            Session session = SecurityUtils.getSubject().getSession();
-            session.setAttribute("user", user);
-            String name = getName();
-            return new SimpleAuthenticationInfo(userName,user.getPassword(),name);
-        } else {
-            return null;
+        if (user == null) {
+            throw new UnknownAccountException();
         }
+        if (!password.equals(user.getPassword())) {
+            throw new IncorrectCredentialsException();
+        }
+
+        Session session = SecurityUtils.getSubject().getSession();
+        session.setAttribute("user", user);
+        String name = getName();
+        return new SimpleAuthenticationInfo(userName, user.getPassword(), name);
     }
 
 }

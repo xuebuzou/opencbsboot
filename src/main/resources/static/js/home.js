@@ -1,6 +1,7 @@
 $(function(){
-	// var loginUser = JSON.parse(sessionStorage.getItem("user"));
-	// $("#userName").text(loginUser.userName.split("-")[1]);
+	var loginUser = JSON.parse(sessionStorage.getItem("user"));
+	$("#userName").text(loginUser.username);
+    $("#userCnname").text(loginUser.cnname);
 	// var adminFlag = loginUser.userRole.indexOf("1");
 	// /*var roles = loginUser.userRole.split("|");
 	// var userRolesTxt = "";
