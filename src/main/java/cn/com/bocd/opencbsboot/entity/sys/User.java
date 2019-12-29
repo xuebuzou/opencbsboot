@@ -8,8 +8,6 @@ public class User {
     private Integer id;
     private String cnname;
     private String username;
-
-    @JsonIgnore
     private String password;
     private String email;
     private String telephone;
@@ -18,8 +16,25 @@ public class User {
     private String skill;
     private String departmentId;
     private Integer loginCount;
-
+    private String roleName;
+    private String roleDesc;
     private List<Role> roles;
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public String getRoleDesc() {
+        return roleDesc;
+    }
+
+    public void setRoleDesc(String roleDesc) {
+        this.roleDesc = roleDesc;
+    }
 
     public Integer getId() {
         return id;
@@ -39,6 +54,10 @@ public class User {
 
     public String getUsername() {
         return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

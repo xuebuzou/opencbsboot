@@ -1,0 +1,76 @@
+<script type="text/javascript" src="../../../js/module/settings/user.js"></script>
+<div id="settings_user_div_1" style="width: 100%; padding: 0px; height: 100%">
+    <div id="settings_user_div_11" class="easyui-panel"
+         data-options="iconCls:'icon-search', title:'查询用户'"
+         style="width: 100%; height: 15%; padding: 0px; margin-bottom: 0px">
+        <table id="settings_user_table_condition" style="width: 100%">
+            <tr>
+                <td style="width: 20%"><input id="settings_user_input_acct"
+                                              class="easyui-textbox" data-options="editable:true" label="账号"
+                                              style="width: 80%"/></td>
+                <td style="width: 20%"><input id="settings_user_input_cnname"
+                                              class="easyui-textbox" data-options="editable:true" label="姓名"
+                                              style="width: 80%"/></td>
+                <td style="width: 20%"><input id="settings_user_input_role"
+                                              class="easyui-textbox" data-options="editable:false" label="角色"
+                                              style="width: 80%"/></td>
+                <td style="width: 20%"><a id="settings_user_linkbutton_query"
+                                          class="easyui-linkbutton" data-options="iconCls:'icon-search'"
+                                          style="margin-left: 10%">查询</a> <a id="settings_user_linkbutton_reset"
+                                                                             class="easyui-linkbutton"
+                                                                             data-options="iconCls:'icon-undo'"
+                                                                             style="margin-left: 10%">重置</a></td>
+            </tr>
+        </table>
+    </div>
+    <table id="settings_user_table_usergrid_12" style="width: 100%; height: 85%"
+           data-options="pagination:true, rownumbers:true, striped:true, singleSelect:true">
+    </table>
+</div>
+
+<div id="settings_user_table_usergrid_12_toolbar" style="display: none">
+    <a href="javascript:void(0)" class="easyui-linkbutton"
+       id="settings_user_linkbutton_adduser" data-options="iconCls:'icon-add',plain:true">新建用户</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton"
+       id="settings_user_linkbutton_upduser" data-options="iconCls:'icon-cut',plain:true">修改用户</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton"
+       id="settings_user_linkbutton_deluser" data-options="iconCls:'icon-remove',plain:true">删除用户</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton"
+       id="settings_user_linkbutton_resetpwd" data-options="iconCls:'icon-redo',plain:true">重置密码</a>
+</div>
+
+<div id="settings_user_dialog_adduser" class="easyui-dialog closeDlg"
+     data-options="modal:true, closed:true" style="padding: 10px; display: none">
+    <div style="margin: 20px">
+        <input id="settings_user_dialog_input_useracct" class="easyui-textbox operated unableUpdate"
+               label="账号" style="width: 70%" data-options="missingMessage:'账号必输', required:true"/>
+    </div>
+    <div style="margin: 20px">
+        <input id="settings_user_dialog_input_cnname" class="easyui-textbox operated"
+               label="姓名" style="width: 70%" data-options="missingMessage:'姓名必输', required:true"/>
+    </div>
+    <div style="margin: 20px">
+        <input id="settings_user_dialog_input_role" class="easyui-textbox operated"
+               label="角色" style="width: 70%" data-options="missingMessage:'角色必选', required:true"/>
+    </div>
+    <div style="margin: 20px">
+        <input id="settings_user_dialog_input_dep" class="easyui-textbox operated"
+               label="机构" style="width: 70%" data-options="missingMessage:'机构必选', required:true"/>
+    </div>
+    <div style="margin: 20px">
+        <input id="settings_user_dialog_input_tel" class="easyui-textbox operated"
+               label="座机" style="width: 70%"/>
+    </div>
+    <div style="margin: 20px">
+        <input id="settings_user_dialog_input_mobile" class="easyui-textbox operated"
+               label="手机" style="width: 70%"/>
+    </div>
+
+    <div id="settings_user_dialog_adduser_buttons" style="display: none">
+        <a href="javascript:void(0)" id="settings_user_dialog_adduser_buttons_submit">提交</a>
+        <a href="javascript:void(0)" id="settings_user_dialog_adduser_buttons_close">关闭</a>
+    </div>
+</div>
+
+
+

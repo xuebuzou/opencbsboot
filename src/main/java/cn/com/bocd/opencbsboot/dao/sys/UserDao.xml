@@ -84,6 +84,10 @@
         <result column="cnname" property="cnname"/>
         <result column="password" property="password"/>
         <result column="departmentId" property="departmentId"/>
+        <result column="telephone" property="telephone"/>
+        <result column="mobilePhone" property="mobilePhone"/>
+        <result column="role_name" property="roleName"/>
+        <result column="role_desc" property="roleDesc"/>
         <collection property="roles" ofType="cn.com.bocd.opencbsboot.entity.sys.Role">
             <id column="role_id" property="id"/>
             <result column="role_name" property="name"/>
@@ -113,33 +117,23 @@
     </select>
 
     <insert id="create" parameterType="cn.com.bocd.opencbsboot.entity.sys.User">
-        <selectKey resultType="int" order="AFTER" keyProperty="id">
-            SELECT LAST_INSERT_ID()
+        <selectKey resultType="int" order="BEFORE" keyProperty="id">
+            select nvl(max(id), 0)+1 from ZG_USER
         </selectKey>
         INSERT INTO ZG_USER(
         id,
         cnname,
         username,
         password,
-        email,
         telephone,
-        mobile_phone,
-        wechat_id,
-        skill,
-        department_id,
-        login_count
+        mobile_phone
         )VALUES(
         #{id},
         #{cnname},
         #{username},
         #{password},
-        #{email},
         #{telephone},
-        #{mobilePhone},
-        #{wechatId},
-        #{skill},
-        #{departmentId},
-        #{loginCount}
+        #{mobilePhone}
         )
     </insert>
 
@@ -163,5 +157,36 @@
         FROM ZG_USER
         WHERE id = #{id}
     </delete>
+
+    <select id="queryUserInfo" parameterType="cn.com.bocd.opencbsboot.entity.sys.User" resultMap="UserAndRulesResultMap">
+        select a.ID            user_id
+        , a.CNNAME        cnname
+        , a.USERNAME      username
+        , a.PASSWORD      password
+        , a.email         email
+        , a.TELEPHONE     telephone
+        , a.MOBILE_PHONE  mobilePhone
+        , a.WECHAT_ID     wechatId
+        , a.SKILL         skill
+        , a.DEPARTMENT_ID departmentId
+        , a.LOGIN_COUNT   loginCount
+        , c.ID          role_id
+        , c.NAME        role_name
+        , c.DESCRIPTION   role_desc
+        from ZG_USER a, ZG_USER_ROLE b, ZG_ROLE c
+    </select>
+
+    <sql id="queryConditions">
+        <where>
+            a.ID = b.USER_ID
+            AND b.ROLE_ID = c.ID
+            <if test="username!=null and username!=''">
+                and a.USERNAME = #{username}
+            </if>
+            <if test="cnname!=null and cnname!=''">
+                and a.cnname = #{cnname}
+            </if>
+        </where>
+    </sql>
 
 </mapper>

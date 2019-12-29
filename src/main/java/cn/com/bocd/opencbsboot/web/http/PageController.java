@@ -3,12 +3,14 @@ package cn.com.bocd.opencbsboot.web.http;
 import cn.com.bocd.opencbsboot.entity.sys.ResponseBo;
 import cn.com.bocd.opencbsboot.entity.sys.RetDTO;
 import cn.com.bocd.opencbsboot.entity.sys.User;
+import cn.com.bocd.opencbsboot.service.sys.UserService;
 import cn.com.bocd.opencbsboot.tool.security.MD5Utils;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,9 +18,11 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class PageController {
     private static final Logger logger = Logger.getLogger(PageController.class);
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/zg")
-    public String index() {
+    public String renderIndex() {
         return "index";
     }
 
@@ -29,13 +33,30 @@ public class PageController {
     }
 
     @GetMapping("/zg/home")
-    public String home() {
+    public String renderHome() {
         return "home";
     }
 
-    @GetMapping("/zg/home/openacct")
-    public String openAcctProgress() {
-        return "module/openacct";
+    @GetMapping("/zg/home/openacct/progress")
+    public String renderAcctProgress() {
+        return "module/openacct/progress";
+    }
+
+    @GetMapping("/zg/home/settings/user")
+    public String renderSettingsUser() {
+        return "module/settings/user";
+    }
+
+    @PostMapping("/zg/home/settings/user/query")
+    @ResponseBody
+    public RetDTO queryUser(User u) {
+        return userService.queryUserInfo(u);
+    }
+
+    @PostMapping("/zg/home/settings/user/adduser")
+    @ResponseBody
+    public RetDTO addUser(User u) {
+        return userService.create(u);
     }
 
     @RequestMapping(value = "/checkLogin")

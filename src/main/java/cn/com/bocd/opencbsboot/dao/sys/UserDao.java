@@ -14,4 +14,5 @@ public interface UserDao {
 	int update(User user);
 	int delete(Integer id);
 	User getByUserName(String userName);
+	List<User> queryUserInfo(User user);
 }
