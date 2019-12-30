@@ -1,9 +1,9 @@
 $(function(){
 	var loginUser = JSON.parse(sessionStorage.getItem("user"));
-	$("#userName").text(loginUser.username);
-    $("#userCnname").text(loginUser.cnname);
-    $("#userRole").text(loginUser.roles[0].description);
-    $("#departmentId").text(loginUser.departmentId);
+	$("#foot_userName").text(loginUser.username);
+    $("#foot_userCnname").text(loginUser.cnname);
+    $("#foot_userRole").text(loginUser.roles[0].description);
+    $("#foot_departmentId").text(loginUser.departmentId);
 
 	// var adminFlag = loginUser.userRole.indexOf("1");
 	// /*var roles = loginUser.userRole.split("|");
