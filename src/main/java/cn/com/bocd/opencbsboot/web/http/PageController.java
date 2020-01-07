@@ -29,7 +29,7 @@ public class PageController {
     @GetMapping("/unAuthorized")
     @ResponseBody
     public String unAuthorized() {
-        return "你没有该交易权限，请联系管理员";
+        return "unAuthorized";
     }
 
     @GetMapping("/zg/home")
