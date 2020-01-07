@@ -37,7 +37,7 @@ public class PageController {
         return "home";
     }
 
-    @RequestMapping(value = "/checkLogin")
+    @RequestMapping(value = "/zg/login")
     @ResponseBody
     public RetDTO login(String username, String password) {
         RetDTO ret = new RetDTO();

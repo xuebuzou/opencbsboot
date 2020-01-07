@@ -6,7 +6,7 @@ function login() {
         return;
     }
     $.ajax({
-        url: "/checkLogin",
+        url: "/zg/login",
         type: "post",
         dataType: "json",
         async: false,
