@@ -37,28 +37,6 @@ public class PageController {
         return "home";
     }
 
-    @GetMapping("/zg/home/openacct/progress")
-    public String renderAcctProgress() {
-        return "module/openacct/progress";
-    }
-
-    @GetMapping("/zg/home/settings/user")
-    public String renderSettingsUser() {
-        return "module/settings/user";
-    }
-
-    @PostMapping("/zg/home/settings/user/query")
-    @ResponseBody
-    public RetDTO queryUser(User u) {
-        return userService.queryUserInfo(u);
-    }
-
-    @PostMapping("/zg/home/settings/user/adduser")
-    @ResponseBody
-    public RetDTO addUser(User u) {
-        return userService.create(u);
-    }
-
     @RequestMapping(value = "/checkLogin")
     @ResponseBody
     public RetDTO login(String username, String password) {
