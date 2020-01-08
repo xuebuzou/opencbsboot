@@ -2,13 +2,19 @@ package cn.com.bocd.opencbsboot.entity.sys;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class User {
     private Integer id;
+    @NotBlank(message = "姓名不能为空")
     private String cnname;
+    @NotBlank(message = "账号不能为空")
     private String username;
     private String password;
+    @Email(message = "邮件格式不对")
     private String email;
     private String telephone;
     private String mobilePhone;

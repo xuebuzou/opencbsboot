@@ -74,9 +74,24 @@ $(function(){
                 $('#settings_user_dialog_adduser_buttons_close').linkbutton({
                     iconCls: 'icon-cancel'
                 });
+                $('#settings_user_dialog_upduser').dialog({
+                    width: "40%",
+                    height: "70%",
+                    closed: true,
+                    modal: true,
+                    buttons: "#settings_user_dialog_upduser_buttons",
+                    draggable: false
+                });
+                $('#settings_user_dialog_upduser_buttons_submit').linkbutton({
+                    iconCls: 'icon-save'
+                });
+                $('#settings_user_dialog_upduser_buttons_close').linkbutton({
+                    iconCls: 'icon-cancel'
+                });
             }
         }
     );
+    //add
     $("#settings_user_linkbutton_adduser").on("click", function () {
         // $(".operated").textbox("enable");
         // $(".operated").textbox("clear");
@@ -112,10 +127,6 @@ $(function(){
             telephone:telephone,
             mobilePhone:mobilePhone
         };
-        console.log(params);
-        // if(!check_settings_user_dialog_adduser_buttons_submit(params)){
-        //     return;
-        // }
         $.post("/zg/home/settings/user/adduser", params, function (result) {
             if ("success" == result.retCode) {
                 $.messager.show({
@@ -143,6 +154,44 @@ $(function(){
             return false;
         }
     }
+    //upd
+    $("#settings_user_linkbutton_upduser").on("click", function () {
+        // $(".operated").textbox("enable");
+        // $(".operated").textbox("clear");
+        // $("#btnsSave").show();
+        var rows = $('#settings_user_table_usergrid_12').datagrid("getSelections");
+        // console.info("rows",rows);
+        if (rows.length != 1) {
+            $.messager.alert('提示信息', '请勾选一条记录', 'error');
+            $('#settings_user_table_usergrid_12').datagrid("unselectAll");
+            $('#settings_user_table_usergrid_12').datagrid("reload");
+            return;
+        }
+        $('#settings_user_dialog_upduser').dialog({
+            title: "修改用户",
+            closed: false
+        });
+        $('#settings_user_dialog_upduser').dialog('center');
+        console.info("rows.username",rows[0].username);
+        $('settings_user_dialog_upduser_input_useracct').textbox("setValue",rows[0].username);
+        // if (loginUser.userId == 888) {
+        //     $("#operateTaskStatus").combobox("setValue", WAIT_ALLOT);
+        //     $("#operateTaskUser").combobox("setValue", current_manager_user_id);
+        //     $("#operateTaskUser").combobox("disable");
+        //     $("#operateWorkload").combobox("disable");
+        //     //operateOnlineDate
+        //     $("#operateOnlineDate").combobox("disable");
+        //     $("#operateFinishDate").combobox("disable");
+        // } else {
+        //     $("#operateTaskStatus").combobox("setValue", PROCESSING);
+        // }
+        // $("#operateTaskStatus").combobox("disable");
+        // $("#operateTaskManager").combobox("setValue", current_manager_user_id);
+        // $("#operateTaskManager").combobox("disable");
+    });
+    $("#settings_user_dialog_upduser_buttons_close").on("click", function () {
+        $('#settings_user_dialog_upduser').dialog("close");
+    });
 
 });
 

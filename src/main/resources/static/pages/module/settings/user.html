@@ -34,8 +34,6 @@
     <a href="javascript:void(0)" class="easyui-linkbutton"
        id="settings_user_linkbutton_upduser" data-options="iconCls:'icon-cut',plain:true">修改用户</a>
     <a href="javascript:void(0)" class="easyui-linkbutton"
-       id="settings_user_linkbutton_deluser" data-options="iconCls:'icon-remove',plain:true">删除用户</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton"
        id="settings_user_linkbutton_resetpwd" data-options="iconCls:'icon-redo',plain:true">重置密码</a>
 </div>
 
@@ -69,6 +67,39 @@
     <div id="settings_user_dialog_adduser_buttons" style="display: none">
         <a href="javascript:void(0)" id="settings_user_dialog_adduser_buttons_submit">提交</a>
         <a href="javascript:void(0)" id="settings_user_dialog_adduser_buttons_close">关闭</a>
+    </div>
+</div>
+
+<div id="settings_user_dialog_upduser" class="easyui-dialog closeDlg"
+     data-options="modal:true, closed:true" style="padding: 10px; display: none">
+    <div style="margin: 20px">
+        <input id="settings_user_dialog_upduser_input_useracct" class="easyui-textbox operated unableUpdate"
+               label="账号" style="width: 70%" />
+    </div>
+    <div style="margin: 20px">
+        <input id="settings_user_dialog_upduser_input_cnname" class="easyui-textbox operated"
+               label="姓名" style="width: 70%" />
+    </div>
+    <div style="margin: 20px">
+        <input id="settings_user_dialog_upduser_input_role" class="easyui-textbox operated"
+               label="角色" style="width: 70%" />
+    </div>
+    <div style="margin: 20px">
+        <input id="settings_user_dialog_upduser_input_dep" class="easyui-textbox operated"
+               label="机构" style="width: 70%" />
+    </div>
+    <div style="margin: 20px">
+        <input id="settings_user_dialog_upduser_input_tel" class="easyui-textbox operated"
+               label="座机" style="width: 70%"/>
+    </div>
+    <div style="margin: 20px">
+        <input id="settings_user_dialog_upduser_input_mobile" class="easyui-textbox operated"
+               label="手机" style="width: 70%"/>
+    </div>
+
+    <div id="settings_user_dialog_upduser_buttons" style="display: none">
+        <a href="javascript:void(0)" id="settings_user_dialog_upduser_buttons_submit">提交</a>
+        <a href="javascript:void(0)" id="settings_user_dialog_upduser_buttons_close">关闭</a>
     </div>
 </div>
 

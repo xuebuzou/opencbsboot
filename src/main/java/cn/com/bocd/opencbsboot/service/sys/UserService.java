@@ -34,7 +34,7 @@ public class UserService {
 			userDao.create(user);
 		}catch (Exception e){
 			e.printStackTrace();
-			ret.setFailRet("新建用户失败:/n"+e.getMessage());
+			ret.setFailRet("新建用户失败,错误原因为:	"+e.getMessage());
 			return ret;
 		}
 		return ret;
