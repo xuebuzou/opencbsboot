@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-public class User {
+public class UserVO {
     private Integer id;
     @NotBlank(message = "姓名不能为空")
     private String cnname;
@@ -21,10 +21,30 @@ public class User {
     private String wechatId;
     private String skill;
     private String departmentId;
+    @NotNull(message = "机构不能为空")
+    private Integer depId;
     private Integer loginCount;
+    @NotNull(message = "角色不能为空")
+    private Integer roleId;
     private String roleName;
     private String roleDesc;
     private List<Role> roles;
+
+    public Integer getDepId() {
+        return depId;
+    }
+
+    public void setDepId(Integer depId) {
+        this.depId = depId;
+    }
+
+    public Integer getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
+    }
 
     public String getRoleName() {
         return roleName;

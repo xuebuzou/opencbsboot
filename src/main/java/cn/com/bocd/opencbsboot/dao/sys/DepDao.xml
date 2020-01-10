@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="cn.com.bocd.opencbsboot.dao.sys.DepDao">
+    <resultMap id="DepMap" type="cn.com.bocd.opencbsboot.entity.sys.ZgDep">
+		<result property="depCode" column="DEP_CODE"/>
+		<result property="depDesc" column="DEP_DESC"/>
+        <result property="depId" column="DEP_ID"/>
+    </resultMap>
+    	
+    <select id="qryDepInfo" parameterType="map" resultMap="DepMap">
+    	SELECT * FROM ZG_DEP
+    </select>
+
+</mapper>

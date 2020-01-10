@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.com.bocd.opencbsboot.dao.sys.UserDao">
-    <resultMap id="userMap" type="cn.com.bocd.opencbsboot.entity.sys.User">
+    <resultMap id="userMap" type="cn.com.bocd.opencbsboot.entity.sys.UserVO">
         <id property="id" column="id"/>
         <result property="cnname" column="cnname"/>
         <result property="username" column="username"/>
@@ -78,14 +78,16 @@
         WHERE id = #{id}
     </select>
 
-    <resultMap type="cn.com.bocd.opencbsboot.entity.sys.User" id="UserAndRulesResultMap">
+    <resultMap type="cn.com.bocd.opencbsboot.entity.sys.UserVO" id="UserAndRulesResultMap">
         <id column="user_id" property="id"/>
         <result column="username" property="username"/>
         <result column="cnname" property="cnname"/>
         <result column="password" property="password"/>
+        <result column="depId" property="depId"/>
         <result column="departmentId" property="departmentId"/>
         <result column="telephone" property="telephone"/>
         <result column="mobilePhone" property="mobilePhone"/>
+        <result column="role_id" property="roleId"/>
         <result column="role_name" property="roleName"/>
         <result column="role_desc" property="roleDesc"/>
         <collection property="roles" ofType="cn.com.bocd.opencbsboot.entity.sys.Role">
@@ -116,7 +118,7 @@
         where username = #{userName}
     </select>
 
-    <insert id="create" parameterType="cn.com.bocd.opencbsboot.entity.sys.User">
+    <insert id="create" parameterType="cn.com.bocd.opencbsboot.entity.sys.UserVO">
         <selectKey resultType="int" order="BEFORE" keyProperty="id">
             select nvl(max(id), 0)+1 from ZG_USER
         </selectKey>
@@ -137,19 +139,64 @@
         )
     </insert>
 
-    <update id="update" parameterType="cn.com.bocd.opencbsboot.entity.sys.User">
+    <insert id="createUserRole" parameterType="cn.com.bocd.opencbsboot.entity.sys.UserVO">
+        <selectKey resultType="int" order="BEFORE" keyProperty="id">
+            select ID from ZG_USER
+            WHERE USERNAME = #{username}
+        </selectKey>
+        INSERT INTO ZG_USER_ROLE(
+        USER_ID,
+        ROLE_ID)VALUES(
+        #{id},
+        #{roleId}
+        )
+    </insert>
+
+    <insert id="createUserDep" parameterType="cn.com.bocd.opencbsboot.entity.sys.UserVO">
+        <selectKey resultType="int" order="BEFORE" keyProperty="id">
+            select ID from ZG_USER
+            WHERE USERNAME = #{username}
+        </selectKey>
+        INSERT INTO ZG_USER_DEP(
+        USER_ID,
+        DEP_ID)VALUES(
+        #{id},
+        #{depId}
+        )
+    </insert>
+
+    <update id="update" parameterType="cn.com.bocd.opencbsboot.entity.sys.UserVO">
         UPDATE ZG_USER
         SET cnname        = #{cnname},
-            username      = #{username},
-            password      = #{password},
-            email         = #{email},
             telephone     = #{telephone},
-            mobile_phone  = #{mobilePhone},
-            wechat_id     = #{wechatId},
-            skill         = #{skill},
-            department_id = #{departmentId},
-            login_count   = #{loginCount}
-        WHERE id = #{id}
+            mobile_phone  = #{mobilePhone}
+        WHERE username = #{username}
+    </update>
+
+    <update id="updateUserRole" parameterType="cn.com.bocd.opencbsboot.entity.sys.UserVO">
+        <selectKey resultType="int" order="BEFORE" keyProperty="id">
+            select ID from ZG_USER
+            WHERE USERNAME = #{username}
+        </selectKey>
+        UPDATE ZG_USER_ROLE
+        SET ROLE_ID       = #{roleId}
+        WHERE user_id = #{id}
+    </update>
+
+    <update id="updateUserDep" parameterType="cn.com.bocd.opencbsboot.entity.sys.UserVO">
+        <selectKey resultType="int" order="BEFORE" keyProperty="id">
+            select ID from ZG_USER
+            WHERE USERNAME = #{username}
+        </selectKey>
+        UPDATE ZG_USER_DEP
+        SET dep_id      = #{depId}
+        WHERE user_id = #{id}
+    </update>
+
+    <update id="resetPwd" parameterType="cn.com.bocd.opencbsboot.entity.sys.UserVO">
+        UPDATE ZG_USER
+        SET PASSWORD      = #{password}
+        WHERE username = #{username}
     </update>
 
     <delete id="delete" parameterType="int">
@@ -158,7 +205,7 @@
         WHERE id = #{id}
     </delete>
 
-    <select id="queryUserInfo" parameterType="cn.com.bocd.opencbsboot.entity.sys.User" resultMap="UserAndRulesResultMap">
+    <select id="queryUserInfo" parameterType="cn.com.bocd.opencbsboot.entity.sys.UserVO" resultMap="UserAndRulesResultMap">
         select a.ID            user_id
         , a.CNNAME        cnname
         , a.USERNAME      username
@@ -168,18 +215,22 @@
         , a.MOBILE_PHONE  mobilePhone
         , a.WECHAT_ID     wechatId
         , a.SKILL         skill
-        , a.DEPARTMENT_ID departmentId
+        , e.DEP_ID   depId
+        , e.DEP_CODE departmentId
         , a.LOGIN_COUNT   loginCount
         , c.ID          role_id
         , c.NAME        role_name
         , c.DESCRIPTION   role_desc
-        from ZG_USER a, ZG_USER_ROLE b, ZG_ROLE c
+        from ZG_USER a, ZG_USER_ROLE b, ZG_ROLE c, ZG_USER_DEP d, ZG_DEP e
+        <include refid="queryConditions1" />
     </select>
 
-    <sql id="queryConditions">
+    <sql id="queryConditions1">
         <where>
             a.ID = b.USER_ID
             AND b.ROLE_ID = c.ID
+            AND a.ID = d.user_id
+            AND d.dep_id = e.dep_id
             <if test="username!=null and username!=''">
                 and a.USERNAME = #{username}
             </if>

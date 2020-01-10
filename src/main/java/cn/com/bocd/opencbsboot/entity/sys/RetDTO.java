@@ -2,6 +2,7 @@ package cn.com.bocd.opencbsboot.entity.sys;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 public class RetDTO implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -11,6 +12,15 @@ public class RetDTO implements Serializable {
     private Object data;
     private Integer total;
     private List<?> rows;
+    private Map<String, Object> result;
+
+    public Map<String, Object> getResult() {
+        return result;
+    }
+
+    public void setResult(Map<String, Object> result) {
+        this.result = result;
+    }
 
     public Integer getTotal() {
         return total;

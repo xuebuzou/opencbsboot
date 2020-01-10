@@ -132,7 +132,7 @@ public class OpenCbsDispatcher implements Dispatcher, ApplicationContextAware {
     @Override
     public CompositeData doDispatch(CompositeData req) {
         CompositeData resp = CDUtils.getRespFromReq(req);
-        CompositeData data = req.deepCopy();
+        CompositeData data = req.deepCopy();//好资源，只拷贝要用的
         req.makeReadOnly();
         try {
             String srctype = ((StringField) req.mGet("SYS_HEAD.SOURCE_TYPE")).getValue();
@@ -176,7 +176,7 @@ public class OpenCbsDispatcher implements Dispatcher, ApplicationContextAware {
                     return resp;
                 } catch (NoSuchFieldException | IllegalAccessException e1) {
                     e1.printStackTrace();
-                    CDUtils.setRespStatus(resp, "F", "888888", "平台配置错误，请检查flow配置文件和Service类定义");
+                    CDUtils.setRespStatus(resp, "F", "fail", "平台配置错误，请检查flow配置文件和Service类定义");
                     return resp;
                 }
             } else {

@@ -4,7 +4,7 @@ import cn.com.bocd.opencbsboot.dao.sys.PermissionDao;
 import cn.com.bocd.opencbsboot.dao.sys.UserDao;
 import cn.com.bocd.opencbsboot.entity.sys.Permission;
 import cn.com.bocd.opencbsboot.entity.sys.Role;
-import cn.com.bocd.opencbsboot.entity.sys.User;
+import cn.com.bocd.opencbsboot.entity.sys.UserVO;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -24,7 +24,7 @@ public class ShiroRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        User user = userService.getByUserName((String) principalCollection.getPrimaryPrincipal());
+        UserVO user = userService.getByUserName((String) principalCollection.getPrimaryPrincipal());
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         for (Role userRole : user.getRoles()) {
             authorizationInfo.addRole(userRole.getName());
@@ -37,7 +37,7 @@ public class ShiroRealm extends AuthorizingRealm {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         String userName = token.getUsername();
         String password = new String((char[]) token.getCredentials());
-        User user = userService.getByUserName(userName);
+        UserVO user = userService.getByUserName(userName);
         if (user == null) {
             throw new UnknownAccountException();
         }

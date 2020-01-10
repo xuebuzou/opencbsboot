@@ -2,7 +2,7 @@ package cn.com.bocd.opencbsboot.web.http;
 
 import cn.com.bocd.opencbsboot.entity.sys.ResponseBo;
 import cn.com.bocd.opencbsboot.entity.sys.RetDTO;
-import cn.com.bocd.opencbsboot.entity.sys.User;
+import cn.com.bocd.opencbsboot.entity.sys.UserVO;
 import cn.com.bocd.opencbsboot.service.sys.UserService;
 import cn.com.bocd.opencbsboot.tool.security.MD5Utils;
 import org.apache.log4j.Logger;

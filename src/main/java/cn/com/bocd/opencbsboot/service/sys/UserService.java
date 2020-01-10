@@ -2,12 +2,14 @@ package cn.com.bocd.opencbsboot.service.sys;
 
 import cn.com.bocd.opencbsboot.dao.sys.UserDao;
 import cn.com.bocd.opencbsboot.entity.sys.RetDTO;
-import cn.com.bocd.opencbsboot.entity.sys.User;
+import cn.com.bocd.opencbsboot.entity.sys.UserVO;
 import cn.com.bocd.opencbsboot.tool.security.MD5Utils;
+import org.apache.catalina.User;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -19,19 +21,22 @@ public class UserService {
     @Autowired
 	private UserDao userDao;
 	
-	public List<User> getByMap(Map<String,Object> map) {
+	public List<UserVO> getByMap(Map<String,Object> map) {
 	    return userDao.getByMap(map);
 	}
 	
-	public User getById(Integer id) {
+	public UserVO getById(Integer id) {
 		return userDao.getById(id);
 	}
-	
-	public RetDTO create(User user) {
+
+	@Transactional
+	public RetDTO create(UserVO user) {
 		RetDTO ret = new RetDTO();
 		try {
 			user.setPassword(MD5Utils.encrypt(user.getUsername(),"bocd"));
 			userDao.create(user);
+			userDao.createUserRole(user);
+			userDao.createUserDep(user);
 		}catch (Exception e){
 			e.printStackTrace();
 			ret.setFailRet("新建用户失败,错误原因为:	"+e.getMessage());
@@ -40,8 +45,10 @@ public class UserService {
 		return ret;
 	}
 	
-	public User update(User user) {
+	public UserVO update(UserVO user) {
 		userDao.update(user);
+		userDao.updateUserRole(user);
+		userDao.updateUserDep(user);
 		return user;
 	}
 	
@@ -49,14 +56,19 @@ public class UserService {
 		return userDao.delete(id);
 	}
 
-	public User getByUserName(String userName) {
+	public UserVO getByUserName(String userName) {
 		return userDao.getByUserName(userName);
 	}
 
-	public RetDTO queryUserInfo(User u){
+	public RetDTO queryUserInfo(UserVO u){
 		RetDTO ret = new RetDTO();
 		ret.setRows(userDao.queryUserInfo(u));
 		return ret;
+	}
+
+	public Integer resetPwd(UserVO user){
+		user.setPassword(MD5Utils.encrypt(user.getUsername(),"bocd"));
+		return userDao.resetPwd(user);
 	}
 
 }
