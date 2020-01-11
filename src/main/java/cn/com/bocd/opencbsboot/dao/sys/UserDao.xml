@@ -237,6 +237,12 @@
             <if test="cnname!=null and cnname!=''">
                 and a.cnname = #{cnname}
             </if>
+            <if test="depId!=null and depId!=''">
+                and d.dep_id = #{depId}
+            </if>
+            <if test="roleId!=null and roleId!=''">
+                and b.role_id = #{roleId}
+            </if>
         </where>
     </sql>
 

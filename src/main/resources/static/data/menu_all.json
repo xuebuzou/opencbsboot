@@ -33,11 +33,6 @@
         "id": 31,
         "text": "用户管理",
         "url": "/zg/home/settings/user"
-      },
-      {
-        "id": 32,
-        "text": "修改密码",
-        "url": ""
       }
     ]
   }

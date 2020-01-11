@@ -23,6 +23,7 @@ import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -69,10 +70,11 @@ public class OpenCbsDispatcher implements Dispatcher, ApplicationContextAware {
     @Override
     @PostConstruct
     public void init() throws IOException {
-        doLoadConfig(getScanBasePackege());
+        doLoadConfigInJar();
     }
 
     public void doLoadConfig(String scanBasePackege) throws IOException {
+//        InputStream in = this.getClass().getResourceAsStream("/"+scanBasePackege);
         File dir = new File(getClass().getResource("/" + scanBasePackege).getFile());
         for (File file : dir.listFiles()) {
             if (file.isDirectory()) {
@@ -84,6 +86,12 @@ public class OpenCbsDispatcher implements Dispatcher, ApplicationContextAware {
                 doParseConfig(file.getAbsolutePath());
             }
         }
+    }
+
+    public void doLoadConfigInJar() throws IOException {
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("flow.xml");
+        doParseConfigInJar(inputStream);
+        logger.info(111);
     }
 
 
@@ -128,11 +136,51 @@ public class OpenCbsDispatcher implements Dispatcher, ApplicationContextAware {
 
     }
 
+    public void doParseConfigInJar(InputStream inputStream) throws IOException {
+        MXParser parser = new MXParser();
+        try {
+            parser.setInput(inputStream, "UTF-8");
+            int eventType;
+            FlowParserContext ctx = new FlowParserContext();
+            while (END_DOCUMENT != (eventType = parser.next())) {
+                switch (eventType) {
+                    case START_TAG:
+                        String tagName = parser.getName();
+                        if ("flow".equals(tagName)) {
+                            ctx.setMsgType(parser.getAttributeValue(0));
+                            ctx.setMsgCode(parser.getAttributeValue(1));
+                            ctx.setSrcType(parser.getAttributeValue(2));
+                        } else if ("component".equals(tagName)) {
+                            ctx.getComponents().add(new BizComponent(parser.getAttributeValue(1), parser.getAttributeValue(2)));
+                        }
+                        break;
+                    case END_TAG:
+                        if ("flow".equals(parser.getName())) {
+                            Flow flow = new Flow();
+                            flow.setMsgType(ctx.getMsgType());
+                            flow.setMsgCode(ctx.getMsgCode());
+                            flow.setSrcType(ctx.getSrcType());
+                            flow.setComponents((ArrayList<BizComponent>) ctx.getComponents());
+                            ctx.setMsgType("");
+                            ctx.setMsgCode("");
+                            ctx.setSrcType("");
+                            ctx.setComponents(null);
+                            handlerMapping.put(flow.getMsgType() + "_" + flow.getMsgCode() + "_" + flow.getSrcType(), flow);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        } catch (XmlPullParserException e) {
+        }
+    }
+
     @Transactional
     @Override
     public CompositeData doDispatch(CompositeData req) {
         CompositeData resp = CDUtils.getRespFromReq(req);
-        CompositeData data = req.deepCopy();//好资源，只拷贝要用的
+        CompositeData data = req.deepCopy();//消耗资源，只拷贝要用的
         req.makeReadOnly();
         try {
             String srctype = ((StringField) req.mGet("SYS_HEAD.SOURCE_TYPE")).getValue();

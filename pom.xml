@@ -11,6 +11,7 @@
     <groupId>cn.com.bocd</groupId>
     <artifactId>opencbsboot</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <name>opencbsboot</name>
     <description>opencbs based on springboot</description>
 
@@ -151,6 +152,13 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+<!--                <executions>-->
+<!--                    <goals>-->
+<!--                        <goal>-->
+<!--                            -->
+<!--                        </goal>-->
+<!--                    </goals>-->
+<!--                </executions>-->
             </plugin>
         </plugins>
 

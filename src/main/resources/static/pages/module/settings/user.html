@@ -1,40 +1,57 @@
 <script type="text/javascript" src="../../../js/module/settings/user.js"></script>
-<div id="settings_user_div_1" style="width: 100%; padding: 0px; height: 100%">
-    <div id="settings_user_div_11" class="easyui-panel"
-         data-options="iconCls:'icon-search', title:'查询用户'"
-         style="width: 100%; height: 15%; padding: 0px; margin-bottom: 0px">
-        <table id="settings_user_table_condition" style="width: 100%">
-            <tr>
-                <td style="width: 20%"><input id="settings_user_input_acct"
-                                              class="easyui-textbox" data-options="editable:true" label="账号"
-                                              style="width: 80%"/></td>
-                <td style="width: 20%"><input id="settings_user_input_cnname"
-                                              class="easyui-textbox" data-options="editable:true" label="姓名"
-                                              style="width: 80%"/></td>
-                <td style="width: 20%"><input id="settings_user_input_role"
-                                              class="easyui-textbox" data-options="editable:false" label="角色"
-                                              style="width: 80%"/></td>
-                <td style="width: 20%"><a id="settings_user_linkbutton_query"
-                                          class="easyui-linkbutton" data-options="iconCls:'icon-search'"
-                                          style="margin-left: 10%">查询</a> <a id="settings_user_linkbutton_reset"
-                                                                             class="easyui-linkbutton"
-                                                                             data-options="iconCls:'icon-undo'"
-                                                                             style="margin-left: 10%">重置</a></td>
-            </tr>
+<div id="settings_user_div_outer" style="width: 100%; height: 100%; box-sizing: border-box ">
+<!--    <div id="settings_user_div_qryNav" class="easyui-panel"-->
+<!--         data-options="iconCls:'icon-search', title:'查询用户'"-->
+<!--         style="width: 100%; height: 80px; margin: -80px 0 0">-->
+<!--        <table id="settings_user_table_condition" style="width: 100%">-->
+<!--            <tr>-->
+<!--                <td style="width: 20%"><input id="settings_user_input_acct1"-->
+<!--                                              class="easyui-textbox" data-options="editable:true" label="账号"-->
+<!--                                              style="width: 80%"/></td>-->
+<!--                <td style="width: 20%"><input id="settings_user_input_cnname2"-->
+<!--                                              class="easyui-textbox" data-options="editable:true" label="姓名"-->
+<!--                                              style="width: 80%"/></td>-->
+<!--                <td style="width: 20%"><input id="settings_user_combobox_role2"-->
+<!--                                              data-options="editable:false" label="角色"-->
+<!--                                              style="width: 80%"/></td>-->
+<!--                <td style="width: 20%"><input id="settings_user_combobox_dep2"-->
+<!--                                              data-options="editable:false" label="机构"-->
+<!--                                              style="width: 80%"/></td>-->
+<!--&lt;!&ndash;                <td style="width: 20%"><a id="settings_user_linkbutton_query"&ndash;&gt;-->
+<!--&lt;!&ndash;                                          class="easyui-linkbutton" data-options="iconCls:'icon-search'"&ndash;&gt;-->
+<!--&lt;!&ndash;                                          style="margin-left: 10%">查询</a> &ndash;&gt;-->
+<!--&lt;!&ndash;                    <a id="settings_user_linkbutton_reset"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                             class="easyui-linkbutton"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                             data-options="iconCls:'icon-undo'"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                             style="margin-left: 10%">重置</a></td>&ndash;&gt;-->
+<!--            </tr>-->
+<!--        </table>-->
+<!--    </div>-->
+    <div id="settings_user_div_Datagrid" style="width: 100%; height: 100%">
+        <table id="settings_user_table_usergrid_12" style="width: 100%; height: 100%"
+               data-options="pagination:true, rownumbers:true, striped:true, singleSelect:true">
         </table>
     </div>
-    <table id="settings_user_table_usergrid_12" style="width: 100%; height: 85%"
-           data-options="pagination:true, rownumbers:true, striped:true, singleSelect:true">
-    </table>
+
 </div>
 
 <div id="settings_user_table_usergrid_12_toolbar" style="display: none">
-    <a href="javascript:void(0)" class="easyui-linkbutton"
-       id="settings_user_linkbutton_adduser" data-options="iconCls:'icon-add',plain:true">新建用户</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton"
-       id="settings_user_linkbutton_upduser" data-options="iconCls:'icon-cut',plain:true">修改用户</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton"
-       id="settings_user_linkbutton_resetpwd" data-options="iconCls:'icon-redo',plain:true">重置密码</a>
+    <div style="margin-top:5px; margin-left: 5px">
+        <input id="settings_user_input_acct" class="easyui-textbox" data-options="editable:true" label="账号:" style="width: 180px"/>
+        <input id="settings_user_input_cnname" class="easyui-textbox" data-options="editable:true" label="姓名:" style="width: 180px"/>
+        <input id="settings_user_combobox_role" data-options="editable:true" label="角色:" style="width: 180px"/>
+        <input id="settings_user_combobox_dep" data-options="editable:true" label="机构:" style="width: 180px"/>
+        <a id="settings_user_linkbutton_query" class="easyui-linkbutton" iconCls="icon-search">搜索用户</a>
+        <a id="settings_user_linkbutton_reset" class="easyui-linkbutton" iconCls="icon-undo">清空条件</a>
+    </div>
+    <div style="margin-bottom:5px; margin-left: 5px">
+        <a href="javascript:void(0)" class="easyui-linkbutton"
+           id="settings_user_linkbutton_adduser" data-options="iconCls:'icon-add',plain:true">新建用户</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton"
+           id="settings_user_linkbutton_upduser" data-options="iconCls:'icon-cut',plain:true">修改用户</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton"
+           id="settings_user_linkbutton_resetpwd" data-options="iconCls:'icon-redo',plain:true">重置密码</a>
+    </div>
 </div>
 
 <div id="settings_user_dialog_adduser" class="easyui-dialog closeDlg"

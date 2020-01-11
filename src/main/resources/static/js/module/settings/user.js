@@ -28,6 +28,16 @@ $(function(){
                     textField: 'depDesc',
                     data: dep_param
                 });
+                $('#settings_user_combobox_role').combobox({
+                    valueField: 'id',
+                    textField: 'description',
+                    data: role_param
+                });
+                $('#settings_user_combobox_dep').combobox({
+                    valueField: 'depId',
+                    textField: 'depDesc',
+                    data: dep_param
+                });
 
                 qryparams = {
                     "username":"",
@@ -273,6 +283,27 @@ $(function(){
                             }
                         );
                 });
+
+                $("#settings_user_linkbutton_query").on("click", function (){
+                    var username = $("#settings_user_input_acct").textbox("getValue");
+                    var cnname = $("#settings_user_input_cnname").textbox("getValue");
+                    var roleId = $('#settings_user_combobox_role').combobox('getValue');
+                    var depId = $('#settings_user_combobox_dep').combobox('getValue');
+                    var qryParam={
+                        username:username,
+                        cnname:cnname,
+                        roleId:roleId,
+                        depId:depId
+                    }
+                    $("#settings_user_table_usergrid_12").datagrid("reload",qryParam);
+                });
+                $("#settings_user_linkbutton_reset").on("click", function (){
+                    $("#settings_user_input_acct").textbox("clear");
+                    $("#settings_user_input_cnname").textbox("clear");
+                    $('#settings_user_combobox_role').combobox('clear');
+                    $('#settings_user_combobox_dep').combobox('clear');
+                });
+
             } else {
                 $.messager.alert('提示信息', '交易初始化失败', 'error');
             }
@@ -280,6 +311,7 @@ $(function(){
     }
 
     initParam();
+
     function getDepDesc(depId) {
         for(var i=0;i<dep_param.length;i++){
             if(depId == dep_param[i]['depCode']){

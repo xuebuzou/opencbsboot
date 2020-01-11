@@ -1,5 +1,6 @@
 package cn.com.bocd.opencbsboot.service.sys;
 
+import cn.com.bocd.opencbsboot.annotation.OpenCbsLog;
 import cn.com.bocd.opencbsboot.dao.sys.UserDao;
 import cn.com.bocd.opencbsboot.entity.sys.RetDTO;
 import cn.com.bocd.opencbsboot.entity.sys.UserVO;
@@ -29,7 +30,6 @@ public class UserService {
 		return userDao.getById(id);
 	}
 
-	@Transactional
 	public RetDTO create(UserVO user) {
 		RetDTO ret = new RetDTO();
 		try {
@@ -60,6 +60,7 @@ public class UserService {
 		return userDao.getByUserName(userName);
 	}
 
+//	@OpenCbsLog("queryuserinfo")
 	public RetDTO queryUserInfo(UserVO u){
 		RetDTO ret = new RetDTO();
 		ret.setRows(userDao.queryUserInfo(u));

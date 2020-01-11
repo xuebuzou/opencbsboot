@@ -22,8 +22,8 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class SettingsUserController {
-    private static final Logger logger = Logger.getLogger(SettingsUserController.class);
+public class SettingsController {
+    private static final Logger logger = Logger.getLogger(SettingsController.class);
     @Autowired
     private UserService userService;
     @Autowired
@@ -69,6 +69,12 @@ public class SettingsUserController {
         }finally {
             return ret;
         }
+    }
+
+    @GetMapping("/zg/home/settings/chgpwd")
+    public String renderSettingsChgpwd() {
+        return "module/settings/chgpwd";
+
     }
 
     @PostMapping("/zg/home/settings/user/upduser")
