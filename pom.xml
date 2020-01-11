@@ -10,7 +10,7 @@
     </parent>
     <groupId>cn.com.bocd</groupId>
     <artifactId>opencbsboot</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>opencbsboot</name>
     <description>opencbs based on springboot</description>
