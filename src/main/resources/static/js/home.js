@@ -1,3 +1,6 @@
+var g_dep_param;
+var g_reserv_status_param;
+var g_acct_type_param;
 $(function(){
 	var loginUser = JSON.parse(sessionStorage.getItem("user"));
 	$("#foot_userName").text(loginUser.username);
@@ -42,7 +45,20 @@ $(function(){
 
 		}
 	);
+    $.get("/zg/home/init", function (result) {
+        if ("success" == result.retCode) {
+            g_reserv_status_param = result.result['reserv_status_def'];
+            g_dep_param = result.result['dep'];
+            g_acct_type_param = result.result['acct_type_def'];
+        }
+    });
 });
+
+function doPostFromZG(msgType,msgCode,params,func){
+    params.MESSAGE_TYPE=msgType;
+    params.MESSAGE_CODE=msgCode;
+    $.post("/zg/gateway", params, func);
+}
 
 function addTabs(text, url){
 	if ($("#dataTabs").tabs("exists", text)){
@@ -54,4 +70,40 @@ function addTabs(text, url){
 	    closable:true,
 	    href:url
 	});
+}
+
+function getDepDesc(value) {
+    for (var i = 0; i < g_dep_param.length; i++) {
+        if (value == g_dep_param[i]['depCode']) {
+            return g_dep_param[i]['depDesc'];
+            break;
+        }
+    }
+}
+
+function getRoleDesc(roleId) {
+    for (var i = 0; i < role_param.length; i++) {
+        if (roleId == role_param[i]['id']) {
+            return role_param[i]['description'];
+            break;
+        }
+    }
+}
+
+function getStatusDesc(value) {
+    for (var i = 0; i < g_reserv_status_param.length; i++) {
+        if (value == g_reserv_status_param[i]['status']) {
+            return g_reserv_status_param[i]['statusDesc'];
+            break;
+        }
+    }
+}
+
+function getAcctTypeDesc(value) {
+    for (var i = 0; i < g_acct_type_param.length; i++) {
+        if (value == g_acct_type_param[i]['acctType']) {
+            return g_acct_type_param[i]['acctTypeDesc'];
+            break;
+        }
+    }
 }

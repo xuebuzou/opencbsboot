@@ -164,7 +164,7 @@ public class OpenCbsDispatcher implements Dispatcher, ApplicationContextAware {
                             ctx.setMsgType("");
                             ctx.setMsgCode("");
                             ctx.setSrcType("");
-                            ctx.setComponents(null);
+                            ctx.setComponents(new ArrayList());
                             handlerMapping.put(flow.getMsgType() + "_" + flow.getMsgCode() + "_" + flow.getSrcType(), flow);
                         }
                         break;
@@ -198,6 +198,9 @@ public class OpenCbsDispatcher implements Dispatcher, ApplicationContextAware {
                     break;
                 }
             }
+            if(flow.getComponents().size()==0){
+                throw new OpenCbsException("zg_pt_error","找不到业务执行流，请检查flow.xml配置文件");
+            }
             for (BizComponent component : flow.getComponents()) {
                 Object serviceObj = context.getBean(component.getService());
                 Method method = serviceObj.getClass().getMethod(component.getFunc(), CompositeData.class, CompositeData.class, CompositeData.class);
@@ -206,7 +209,7 @@ public class OpenCbsDispatcher implements Dispatcher, ApplicationContextAware {
         } catch (Exception e) {
             return doHandleException(resp, e);
         }
-        CDUtils.setRespStatus(resp, "S", "000000", "Success");
+        CDUtils.setRespStatus(resp, "S", "success", "执行成功");
         return resp;
     }
 
@@ -224,7 +227,7 @@ public class OpenCbsDispatcher implements Dispatcher, ApplicationContextAware {
                     return resp;
                 } catch (NoSuchFieldException | IllegalAccessException e1) {
                     e1.printStackTrace();
-                    CDUtils.setRespStatus(resp, "F", "fail", "平台配置错误，请检查flow配置文件和Service类定义");
+                    CDUtils.setRespStatus(resp, "F", "zg_pt_error", "平台配置错误，请检查flow配置文件和Service类定义");
                     return resp;
                 }
             } else {
@@ -242,11 +245,14 @@ public class OpenCbsDispatcher implements Dispatcher, ApplicationContextAware {
                 || e instanceof NoSuchFieldException
                 || e instanceof NoSuchBeanDefinitionException) {
             e.printStackTrace();
-            CDUtils.setRespStatus(resp, "F", "888888", "平台配置错误，请检查flow配置文件和Service类定义");
+            CDUtils.setRespStatus(resp, "F", "zg_pt_error", "请检查flow配置文件和Service类定义");
             return resp;
-        } else {
+        } else if (e instanceof OpenCbsException){
+            CDUtils.setRespStatus(resp,"F",((OpenCbsException) e).retCode,((OpenCbsException) e).retMsg);
+            return resp;
+        } else{
             e.printStackTrace();
-            CDUtils.setRespStatus(resp, "F", "888888", "运行时错误");
+            CDUtils.setRespStatus(resp, "F", "zg_other_error", "其他错误");
             return resp;
         }
     }

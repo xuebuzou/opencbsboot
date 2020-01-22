@@ -1,18 +1,18 @@
 package cn.com.bocd.opencbsboot.tool.compositedata.helper;
 
 
+import cn.com.bocd.opencbsboot.exception.other.ReadOnlyException;
 import cn.com.bocd.opencbsboot.tool.compositedata.rocoll.ReadOnlyCollection;
 import cn.com.bocd.opencbsboot.tool.compositedata.rocoll.ReadOnlyEntrySet;
 import cn.com.bocd.opencbsboot.tool.compositedata.rocoll.ReadOnlySet;
-import cn.com.bocd.opencbsboot.exception.other.ReadOnlyException;
+import org.junit.Test;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public final class CompositeData extends AtomData implements
-        Map<String, AtomData> {
+public final class CompositeData extends AtomData implements Map<String, AtomData> {
     private final static int POINTCODE;
     private final static int LPCODE;
     private final static int RPCODE;
@@ -27,6 +27,10 @@ public final class CompositeData extends AtomData implements
 
     public CompositeData() {
         data = new HashMap<>();
+    }
+
+    public Map<String, AtomData> getData() {
+        return data;
     }
 
     @Override
@@ -122,8 +126,7 @@ public final class CompositeData extends AtomData implements
             return null;
         }
         fullname = fullname.trim();
-        if (fullname.codePointAt(0) == POINTCODE
-                || fullname.codePointAt(0) == LPCODE) {
+        if (fullname.codePointAt(0) == POINTCODE || fullname.codePointAt(0) == LPCODE) {
             return null;
         }
         int pi = fullname.indexOf(POINTCODE);
@@ -159,8 +162,7 @@ public final class CompositeData extends AtomData implements
         if (fullname.codePointAt(0) == POINTCODE) {
             fullname = fullname.substring(1);
         }
-        if (fullname.codePointAt(0) == POINTCODE
-                || fullname.codePointAt(0) == LPCODE) {
+        if (fullname.codePointAt(0) == POINTCODE || fullname.codePointAt(0) == LPCODE) {
             throw new PutValueFailedException("invalid name");
         }
         int pi = fullname.indexOf(POINTCODE);
@@ -217,25 +219,20 @@ public final class CompositeData extends AtomData implements
 
     @Override
     public boolean equals(Object o) {
-        if (o == this)
-            return true;
+        if (o == this) return true;
 
-        if (!(o instanceof Map))
-            return false;
+        if (!(o instanceof Map)) return false;
         Map m = (Map) o;
-        if (m.size() != size())
-            return false;
+        if (m.size() != size()) return false;
 
         try {
             for (Entry<String, AtomData> e : entrySet()) {
                 String key = e.getKey();
                 Object value = e.getValue();
                 if (value == null) {
-                    if (!(m.get(key) == null && m.containsKey(key)))
-                        return false;
+                    if (!(m.get(key) == null && m.containsKey(key))) return false;
                 } else {
-                    if (!value.equals(m.get(key)))
-                        return false;
+                    if (!value.equals(m.get(key))) return false;
                 }
             }
         } catch (ClassCastException unused) {
@@ -253,8 +250,7 @@ public final class CompositeData extends AtomData implements
      * @return 被替换的值
      * @throws PutValueFailedException 如果在fullname路径上出现类型不匹配的情况，或者fullname格式错误，则抛出异常
      */
-    public AtomData mPut(String fullname, AtomData value)
-            throws PutValueFailedException {
+    public AtomData mPut(String fullname, AtomData value) throws PutValueFailedException {
         if (readOnly) {
             throw new ReadOnlyException();
         }
@@ -348,6 +344,12 @@ public final class CompositeData extends AtomData implements
             }
         }
         return cp;
+    }
+
+    @Test
+    public void testCd() {
+        CompositeData cd = new CompositeData();
+        System.out.println(1);
     }
 
 }

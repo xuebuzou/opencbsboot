@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="generate.ZgDepDao">
+  <resultMap id="BaseResultMap" type="generate.ZgDep">
+    <id column="DEP_CODE" jdbcType="VARCHAR" property="depCode" />
+    <result column="DEP_DESC" jdbcType="VARCHAR" property="depDesc" />
+    <result column="DEP_ID" jdbcType="DECIMAL" property="depId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    DEP_CODE, DEP_DESC, DEP_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ZG.ZG_DEP
+    where DEP_CODE = #{depCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ZG.ZG_DEP
+    where DEP_CODE = #{depCode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="generate.ZgDep">
+    <selectKey keyProperty="depCode" order="AFTER" resultType="java.lang.String">
+      Oracle
+    </selectKey>
+    insert into ZG.ZG_DEP (DEP_DESC, DEP_ID)
+    values (#{depDesc,jdbcType=VARCHAR}, #{depId,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="generate.ZgDep">
+    <selectKey keyProperty="depCode" order="AFTER" resultType="java.lang.String">
+      Oracle
+    </selectKey>
+    insert into ZG.ZG_DEP
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="depDesc != null">
+        DEP_DESC,
+      </if>
+      <if test="depId != null">
+        DEP_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="depDesc != null">
+        #{depDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="depId != null">
+        #{depId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="generate.ZgDep">
+    update ZG.ZG_DEP
+    <set>
+      <if test="depDesc != null">
+        DEP_DESC = #{depDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="depId != null">
+        DEP_ID = #{depId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where DEP_CODE = #{depCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="generate.ZgDep">
+    update ZG.ZG_DEP
+    set DEP_DESC = #{depDesc,jdbcType=VARCHAR},
+      DEP_ID = #{depId,jdbcType=DECIMAL}
+    where DEP_CODE = #{depCode,jdbcType=VARCHAR}
+  </update>
+</mapper>

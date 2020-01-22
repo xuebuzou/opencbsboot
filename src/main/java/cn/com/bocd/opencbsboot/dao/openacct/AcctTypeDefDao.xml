@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bocd.opencbsboot.dao.openacct.AcctTypeDefDao">
+  <resultMap id="BaseResultMap" type="cn.com.bocd.opencbsboot.entity.AcctTypeDef">
+    <id column="ACCT_TYPE" jdbcType="VARCHAR" property="acctType" />
+    <result column="ACCT_TYPE_DESC" jdbcType="VARCHAR" property="acctTypeDesc" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ACCT_TYPE, ACCT_TYPE_DESC
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ZG.ACCT_TYPE_DEF
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ZG.ACCT_TYPE_DEF
+    where ACCT_TYPE = #{acctType,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.com.bocd.opencbsboot.entity.AcctTypeDef">
+    <selectKey keyProperty="acctType" order="AFTER" resultType="java.lang.String">
+      Oracle
+    </selectKey>
+    insert into ZG.ACCT_TYPE_DEF (ACCT_TYPE_DESC)
+    values (#{acctTypeDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.bocd.opencbsboot.entity.AcctTypeDef">
+    <selectKey keyProperty="acctType" order="AFTER" resultType="java.lang.String">
+      Oracle
+    </selectKey>
+    insert into ZG.ACCT_TYPE_DEF
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="acctTypeDesc != null">
+        ACCT_TYPE_DESC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="acctTypeDesc != null">
+        #{acctTypeDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.bocd.opencbsboot.entity.AcctTypeDef">
+    update ZG.ACCT_TYPE_DEF
+    <set>
+      <if test="acctTypeDesc != null">
+        ACCT_TYPE_DESC = #{acctTypeDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ACCT_TYPE = #{acctType,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.bocd.opencbsboot.entity.AcctTypeDef">
+    update ZG.ACCT_TYPE_DEF
+    set ACCT_TYPE_DESC = #{acctTypeDesc,jdbcType=VARCHAR}
+    where ACCT_TYPE = #{acctType,jdbcType=VARCHAR}
+  </update>
+</mapper>

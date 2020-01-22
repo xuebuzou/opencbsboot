@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bocd.opencbsboot.dao.openacct.ReservInfoDao">
+    <resultMap id="BaseResultMap" type="cn.com.bocd.opencbsboot.entity.ReservInfo">
+        <id column="RESERV_ID" jdbcType="VARCHAR" property="reservId"/>
+        <result column="PT_NAME" jdbcType="VARCHAR" property="ptName"/>
+        <result column="CERT_NO" jdbcType="VARCHAR" property="certNo"/>
+        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+        <result column="DEP_CODE" jdbcType="VARCHAR" property="depCode"/>
+        <result column="RESERV_PHONE" jdbcType="VARCHAR" property="reservPhone"/>
+        <result column="ACCT_TYPE" jdbcType="VARCHAR" property="acctType"/>
+        <result column="VERIFIER" jdbcType="VARCHAR" property="verifier"/>
+        <result column="NOTE" jdbcType="VARCHAR" property="note"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+      RESERV_ID, PT_NAME, CERT_NO, STATUS, DEP_CODE, RESERV_PHONE, ACCT_TYPE, VERIFIER, NOTE
+  </sql>
+    <sql id="BaseCondition">
+        <where>
+            <if test="reservId != null and reservId != ''">
+                and RESERV_ID = #{reservId}
+            </if>
+            <if test="ptName != null and ptName != ''">
+                and PT_NAME like CONCAT('%', #{ptName},'%')
+            </if>
+            <if test="certNo != null and certNo != ''">
+                and CERT_NO = #{certNo}
+            </if>
+            <if test="status != null and status != ''">
+                and STATUS = #{status}
+            </if>
+            <if test="depCode != null and depCode != ''">
+                and DEP_CODE = #{depCode}
+            </if>
+            <if test="reservPhone != null and reservPhone != ''">
+                and RESERV_PHONE = #{reservPhone}
+            </if>
+            <if test="acctType != null and acctType != ''">
+                and ACCT_TYPE = #{acctType}
+            </if>
+            <if test="verifier != null and verifier != ''">
+                and VERIFIER = #{verifier}
+            </if>
+            <if test="reservDate != null and reservDate != ''">
+                and RESERV_DATE = #{reservDate}
+            </if>
+        </where>
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ZG.RESERV_INFO
+        where RESERV_ID = #{reservId,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByParam" parameterType="cn.com.bocd.opencbsboot.entity.ReservInfo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ZG.RESERV_INFO
+        <include refid="BaseCondition"/>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ZG.RESERV_INFO
+    where RESERV_ID = #{reservId,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="cn.com.bocd.opencbsboot.entity.ReservInfo">
+    insert into ZG.RESERV_INFO (RESERV_ID,PT_NAME, CERT_NO, STATUS,
+      DEP_CODE, RESERV_PHONE, ACCT_TYPE, 
+      VERIFIER, NOTE, RESERV_TIME, RESERV_DATE
+      )
+    values (#{reservId,jdbcType=VARCHAR},#{ptName,jdbcType=VARCHAR}, #{certNo,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
+      #{depCode,jdbcType=VARCHAR}, #{reservPhone,jdbcType=VARCHAR}, #{acctType,jdbcType=VARCHAR},
+      #{verifier,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{reservTime,jdbcType=VARCHAR}, #{reservDate,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="generate.ReservInfo">
+        <selectKey keyProperty="reservId" order="AFTER" resultType="java.lang.String">
+            Oracle
+        </selectKey>
+        insert into ZG.RESERV_INFO
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ptName != null">
+                PT_NAME,
+            </if>
+            <if test="certNo != null">
+                CERT_NO,
+            </if>
+            <if test="status != null">
+                `STATUS`,
+            </if>
+            <if test="depCode != null">
+                DEP_CODE,
+            </if>
+            <if test="reservPhone != null">
+                RESERV_PHONE,
+            </if>
+            <if test="acctType != null">
+                ACCT_TYPE,
+            </if>
+            <if test="verifier != null">
+                VERIFIER,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="ptName != null">
+                #{ptName,jdbcType=VARCHAR},
+            </if>
+            <if test="certNo != null">
+                #{certNo,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="depCode != null">
+                #{depCode,jdbcType=VARCHAR},
+            </if>
+            <if test="reservPhone != null">
+                #{reservPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="acctType != null">
+                #{acctType,jdbcType=VARCHAR},
+            </if>
+            <if test="verifier != null">
+                #{verifier,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="generate.ReservInfo">
+        update ZG.RESERV_INFO
+        <set>
+            <if test="ptName != null">
+                PT_NAME = #{ptName,jdbcType=VARCHAR},
+            </if>
+            <if test="certNo != null">
+                CERT_NO = #{certNo,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                `STATUS` = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="depCode != null">
+                DEP_CODE = #{depCode,jdbcType=VARCHAR},
+            </if>
+            <if test="reservPhone != null">
+                RESERV_PHONE = #{reservPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="acctType != null">
+                ACCT_TYPE = #{acctType,jdbcType=VARCHAR},
+            </if>
+            <if test="verifier != null">
+                VERIFIER = #{verifier,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where RESERV_ID = #{reservId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.com.bocd.opencbsboot.entity.ReservInfo">
+    update ZG.RESERV_INFO
+    set PT_NAME = #{ptName,jdbcType=VARCHAR},
+      CERT_NO = #{certNo,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      DEP_CODE = #{depCode,jdbcType=VARCHAR},
+      RESERV_PHONE = #{reservPhone,jdbcType=VARCHAR},
+      ACCT_TYPE = #{acctType,jdbcType=VARCHAR},
+      VERIFIER = #{verifier,jdbcType=VARCHAR},
+      NOTE = #{note,jdbcType=VARCHAR}
+    where RESERV_ID = #{reservId,jdbcType=VARCHAR}
+  </update>
+</mapper>

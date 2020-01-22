@@ -1,0 +1,140 @@
+<script type="text/javascript" src="../../../../js/module/openacct/progress/progress.js"></script>
+<div id="openacct_progress_div_outer" style="width: 100%; height: 100%; box-sizing: border-box ">
+    <!--    <div id="openacct_progress_div_qryNav" class="easyui-panel"-->
+    <!--         data-options="iconCls:'icon-search', title:'查询用户'"-->
+    <!--         style="width: 100%; height: 80px; margin: -80px 0 0">-->
+    <!--        <table id="openacct_progress_table_condition" style="width: 100%">-->
+    <!--            <tr>-->
+    <!--                <td style="width: 20%"><input id="openacct_progress_input_acct1"-->
+    <!--                                              class="easyui-textbox" data-options="editable:true" label="账号"-->
+    <!--                                              style="width: 80%"/></td>-->
+    <!--                <td style="width: 20%"><input id="openacct_progress_input_cnname2"-->
+    <!--                                              class="easyui-textbox" data-options="editable:true" label="姓名"-->
+    <!--                                              style="width: 80%"/></td>-->
+    <!--                <td style="width: 20%"><input id="openacct_progress_combobox_role2"-->
+    <!--                                              data-options="editable:false" label="角色"-->
+    <!--                                              style="width: 80%"/></td>-->
+    <!--                <td style="width: 20%"><input id="openacct_progress_combobox_dep2"-->
+    <!--                                              data-options="editable:false" label="机构"-->
+    <!--                                              style="width: 80%"/></td>-->
+    <!--&lt;!&ndash;                <td style="width: 20%"><a id="openacct_progress_linkbutton_query"&ndash;&gt;-->
+    <!--&lt;!&ndash;                                          class="easyui-linkbutton" data-options="iconCls:'icon-search'"&ndash;&gt;-->
+    <!--&lt;!&ndash;                                          style="margin-left: 10%">查询</a> &ndash;&gt;-->
+    <!--&lt;!&ndash;                    <a id="openacct_progress_linkbutton_reset"&ndash;&gt;-->
+    <!--&lt;!&ndash;                                                                             class="easyui-linkbutton"&ndash;&gt;-->
+    <!--&lt;!&ndash;                                                                             data-options="iconCls:'icon-undo'"&ndash;&gt;-->
+    <!--&lt;!&ndash;                                                                             style="margin-left: 10%">重置</a></td>&ndash;&gt;-->
+    <!--            </tr>-->
+    <!--        </table>-->
+    <!--    </div>-->
+    <div id="openacct_progress_div_Datagrid" style="width: 100%; height: 100%">
+        <table id="openacct_progress_table_datagrid_12" style="width: 100%; height: 100%"
+               data-options="pagination:true, rownumbers:true, striped:true, singleSelect:true">
+        </table>
+    </div>
+
+</div>
+
+<div id="openacct_progress_table_datagrid_12_toolbar" style="display: none">
+    <div style="margin-top:5px; margin-left: 5px">
+        <input id="openacct_progress_input_reservId" class="easyui-textbox" data-options="editable:true" label="预约编号:" style="width: 300px"/>
+        <input id="openacct_progress_input_ptName" class="easyui-textbox" data-options="editable:true" label="单位名称:" style="width: 300px"/>
+        <input id="openacct_progress_input_certNo" class="easyui-textbox" data-options="editable:true" label="证照号码:" style="width: 300px"/>
+    </div>
+    <div style="margin-top:5px; margin-left: 5px">
+        <input id="openacct_progress_combobox_status" data-options="editable:true" label="当前状态:" style="width: 250px"/>
+        <input id="openacct_progress_combobox_dep" data-options="editable:true" label="所属机构:" style="width: 200px"/>
+        <input id="openacct_progress_input_reservPhone" class="easyui-textbox" data-options="editable:true" label="预约电话:" style="width: 200px"/>
+        <input id="openacct_progress_input_acctType" class="easyui-textbox" data-options="editable:true" label="账户类型:" style="width: 200px"/>
+        <input id="openacct_progress_input_verifier" class="easyui-textbox" data-options="editable:true" label="核实人:" style="width: 200px"/>
+    </div>
+    <div style="margin-top:5px; margin-left: 5px">
+        <a id="openacct_progress_linkbutton_query" class="easyui-linkbutton" iconCls="icon-search">搜索</a>
+        <a id="openacct_progress_linkbutton_reset" class="easyui-linkbutton" iconCls="icon-undo">清空</a>
+    </div>
+    <div style="margin-bottom:5px; margin-left: 5px">
+        <a href="javascript:void(0)" class="easyui-linkbutton"
+           id="openacct_progress_linkbutton_detail" data-options="iconCls:'icon-search',plain:true">详细预约信息</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton"
+           id="openacct_progress_linkbutton_compare" data-options="iconCls:'icon-redo',plain:true">数据比对</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton"
+           id="openacct_progress_linkbutton_qualification" data-options="iconCls:'icon-redo',plain:true">资格审查</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton"
+           id="openacct_progress_linkbutton_verifysheet" data-options="iconCls:'icon-print',plain:true">打印核实单</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton"
+           id="openacct_progress_linkbutton_application" data-options="iconCls:'icon-print',plain:true">开户申请书</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton"
+           id="openacct_progress_linkbutton_reportToPBC" data-options="iconCls:'icon-redo',plain:true">人行报备</a>
+
+        <!--<a href="javascript:void(0)" class="easyui-linkbutton"-->
+           <!--id="openacct_progress_linkbutton_resetpwd" data-options="iconCls:'icon-redo',plain:true">重置密码</a>-->
+    </div>
+</div>
+
+<div id="openacct_progress_dialog_adduser" class="easyui-dialog closeDlg"
+     data-options="modal:true, closed:true" style="padding: 10px; display: none">
+    <div style="margin: 20px">
+        <input id="openacct_progress_dialog_adduser_input_useracct" class="easyui-textbox operated unableUpdate openacct_progress_dialog_adduser"
+               label="账号" style="width: 70%" data-options="missingMessage:'账号必输', required:true"/>
+    </div>
+    <div style="margin: 20px">
+        <input id="openacct_progress_dialog_adduser_input_cnname" class="easyui-textbox operated openacct_progress_dialog_adduser"
+               label="姓名" style="width: 70%" data-options="missingMessage:'姓名必输', required:true"/>
+    </div>
+    <div style="margin: 20px">
+        <input id="openacct_progress_dialog_adduser_combobox_role" class="easyui-textbox operated openacct_progress_dialog_adduser"
+               label="角色" style="width: 70%" data-options="missingMessage:'角色必选', required:true"/>
+    </div>
+    <div style="margin: 20px">
+        <input id="openacct_progress_dialog_adduser_combobox_dep" class="easyui-textbox operated openacct_progress_dialog_adduser"
+               label="机构" style="width: 70%" data-options="missingMessage:'机构必选', required:true"/>
+    </div>
+    <div style="margin: 20px">
+        <input id="openacct_progress_dialog_adduser_input_tel" class="easyui-textbox operated openacct_progress_dialog_adduser"
+               label="座机" style="width: 70%"/>
+    </div>
+    <div style="margin: 20px">
+        <input id="openacct_progress_dialog_adduser_input_mobile" class="easyui-textbox operated openacct_progress_dialog_adduser"
+               label="手机" style="width: 70%"/>
+    </div>
+
+    <div id="openacct_progress_dialog_adduser_buttons" style="display: none">
+        <a href="javascript:void(0)" id="openacct_progress_dialog_adduser_buttons_submit">提交</a>
+        <a href="javascript:void(0)" id="openacct_progress_dialog_adduser_buttons_close">关闭</a>
+    </div>
+</div>
+
+<div id="openacct_progress_dialog_upduser" class="easyui-dialog closeDlg"
+     data-options="modal:true, closed:true" style="padding: 10px; display: none">
+    <div style="margin: 20px">
+        <input id="openacct_progress_dialog_upduser_input_useracct" class="easyui-textbox"
+               label="账号" style="width: 70%" />
+    </div>
+    <div style="margin: 20px">
+        <input id="openacct_progress_dialog_upduser_input_cnname" class="easyui-textbox"
+               label="姓名" style="width: 70%" />
+    </div>
+    <div style="margin: 20px">
+        <input id="openacct_progress_dialog_upduser_combobox_role" label="角色" style="width: 70%" />
+    </div>
+    <div style="margin: 20px">
+        <input id="openacct_progress_dialog_upduser_combobox_dep" class="easyui-textbox"
+               label="机构" style="width: 70%" />
+    </div>
+    <div style="margin: 20px">
+        <input id="openacct_progress_dialog_upduser_input_tel" class="easyui-textbox"
+               label="座机" style="width: 70%"/>
+    </div>
+    <div style="margin: 20px">
+        <input id="openacct_progress_dialog_upduser_input_mobile" class="easyui-textbox"
+               label="手机" style="width: 70%"/>
+    </div>
+
+    <div id="openacct_progress_dialog_upduser_buttons" style="display: none">
+        <a href="javascript:void(0)" id="openacct_progress_dialog_upduser_buttons_submit">提交</a>
+        <a href="javascript:void(0)" id="openacct_progress_dialog_upduser_buttons_close">关闭</a>
+    </div>
+</div>
+
+
+

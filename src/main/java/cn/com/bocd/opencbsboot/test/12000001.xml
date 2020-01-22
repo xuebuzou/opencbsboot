@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service>
+	<sys-header>
+		<data name="SYS_HEAD">
+			<struct>
+				<data name="MODULE_ID">
+					<field length="2" scale="0" type="string">FM</field>
+				</data>
+				<data name="TRAN_TIMESTAMP">
+					<field length="9" scale="0" type="string"></field>
+				</data>
+				<data name="SOURCE_BRANCH_NO">
+					<field length="50" scale="0" type="string">000001</field>
+				</data>
+				<data name="BRANCH_ID">
+					<field length="10" scale="0" type="string">0101</field>
+				</data>
+				<data name="USER_LANG">
+					<field length="100" scale="0" type="string">CHINESE</field>
+				</data>
+				<data name="SEQ_NO">
+					<field length="20" scale="0" type="string">T1712081517866</field>
+				</data>
+				<data name="SOURCE_TYPE">
+					<field length="2" scale="0" type="string">CB</field>
+				</data>
+				<data name="TRAN_CODE">
+					<field length="8" scale="0" type="string"/>
+				</data>
+				<data name="SERVER_ID">
+					<field length="6" scale="0" type="string">127.0.0.1</field>
+				</data>
+				<data name="MESSAGE_CODE">
+					<field length="6" scale="0" type="string">0001</field>
+				</data>
+				<data name="SERVICE_CODE">
+					<field length="30" scale="0" type="string">SVR_ZG</field>
+				</data>
+				<data name="AUTH_PASSWORD">
+					<field length="30" scale="0" type="string"/>
+				</data>
+				<data name="APPR_FLAG">
+					<field length="1" scale="0" type="string"/>
+				</data>
+				<data name="USER_ID">
+					<field length="30" scale="0" type="string">903303</field>
+				</data>
+				<data name="PROGRAM_ID">
+					<field length="20" scale="0" type="string">FM701</field>
+				</data>
+				<data name="AUTH_FLAG">
+					<field length="1" scale="0" type="string">N</field>
+				</data>
+				<data name="TRAN_TYPE">
+					<field length="1" scale="0" type="string"/>
+				</data>
+				<data name="APPR_USER_ID">
+					<field length="30" scale="0" type="string"/>
+				</data>
+				<data name="DEST_BRANCH_NO">
+					<field length="6" scale="0" type="string">000001</field>
+				</data>
+				<data name="TRAN_DATE">
+					<field length="8" scale="0" type="string">20190809</field>
+				</data>
+				<data name="AUTH_USER_ID">
+					<field length="30" scale="0" type="string"/>
+				</data>
+				<data name="TRAN_MODE">
+					<field length="1" scale="0" type="string">ONLINE</field>
+				</data>
+				<data name="MESSAGE_TYPE">
+					<field length="4" scale="0" type="string">1200</field>
+				</data>
+				<data name="WS_ID">
+					<field length="200" scale="0" type="string">001</field>
+				</data>
+				<data name="REVERSAL_TRAN_TYPE">
+					<field length="0" scale="0" type="string"/>
+				</data>
+			</struct>
+		</data>
+	</sys-header>
+	<app-header>
+		<data name="APP_HEAD">
+			<struct>
+				<data name="PAGE_END">
+					<field length="15" scale="0" type="string">0</field>
+				</data>
+				<data name="CURRENT_NUM">
+					<field length="15" scale="0" type="string">0</field>
+				</data>
+				<data name="PGUP_OR_PGDN">
+					<field length="15" scale="0" type="string">0</field>
+				</data>
+				<data name="PAGE_START">
+					<field length="15" scale="0" type="string">0</field>
+				</data>
+				<data name="TOTAL_NUM">
+					<field length="8" scale="0" type="string">-1</field>
+				</data>
+			</struct>
+		</data>
+	</app-header>
+	<local-header>
+		<data name="LOCAL_HEAD">
+			<struct/>
+		</data>
+	</local-header>
+	<body>
+		<data name="RESERV_PHONE">
+			<field length="3" scale="0" type="string">15008426617</field>
+		</data>
+		<data name="PT_NAME">
+			<field length="3" scale="0" type="string">XX猪饲料公司</field>
+		</data>
+		<data name="CERT_NO">
+			<field length="3" scale="0" type="string">CERT1234</field>
+		</data>
+		<data name="DEP_CODE">
+			<field length="3" scale="0" type="string">0101</field>
+		</data>
+		<data name="ACCT_TYPE">
+			<field length="3" scale="0" type="string">JB</field>
+		</data>
+	</body>
+</service>
