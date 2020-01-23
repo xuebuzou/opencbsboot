@@ -4,7 +4,7 @@ import cn.com.bocd.opencbsboot.entity.ReservInfo;
 import cn.com.bocd.opencbsboot.entity.sys.ResponseBo;
 import cn.com.bocd.opencbsboot.entity.sys.RetDTO;
 import cn.com.bocd.opencbsboot.entity.sys.UserVO;
-import cn.com.bocd.opencbsboot.service.openacct.OpenAcctService;
+//import cn.com.bocd.opencbsboot.service.openacct.OpenAcctService;
 import cn.com.bocd.opencbsboot.service.sys.ParamService;
 import cn.com.bocd.opencbsboot.service.sys.UserService;
 import cn.com.bocd.opencbsboot.tool.security.MD5Utils;
@@ -25,8 +25,8 @@ public class PageController {
     private static final Logger logger = Logger.getLogger(PageController.class);
     @Autowired
     private UserService userService;
-    @Autowired
-    OpenAcctService oaService;
+//    @Autowired
+//    OpenAcctService oaService;
     @Autowired
     ParamService paramService;
 

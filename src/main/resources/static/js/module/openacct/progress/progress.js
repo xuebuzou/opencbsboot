@@ -31,8 +31,8 @@ $(function () {
                         idField: "RESERV_ID",
                         fitColumns: true,
                         singleSelect: false,
-                        pageSize: 15,
-                        pageList: [15, 30, 50, 80, 100],
+                        pageSize: 2,
+                        pageList: [2, 5, 50],
                         toolbar: datagrid_toolbar,
                         columns: [[
                             {
@@ -141,23 +141,31 @@ $(function () {
                         }
                     }
                 );
-                $("#openacct_progress_linkbutton_detail").on("click", function () {
+                function checkAfterclickToolBar() {
                     var rows = $('#openacct_progress_table_datagrid_12').datagrid("getSelections");
                     if (rows.length != 1) {
                         $.messager.alert('提示信息', '请勾选一条记录', 'error');
                         $('#openacct_progress_table_datagrid_12').datagrid("unselectAll");
                         $('#openacct_progress_table_datagrid_12').datagrid("reload");
+                        return false;
+                    }
+                    return true;
+                }
+                function getSelected() {
+                    var rows = $('#openacct_progress_table_datagrid_12').datagrid("getSelections");
+                    return rows[0];
+                }
+                $("#openacct_progress_linkbutton_detail").on("click", function () {
+                    if(!checkAfterclickToolBar()){
                         return;
                     }
                     addTabs("详细预约信息", "/zg/home/openacct/progress/detail");
                 });
                 $("#openacct_progress_linkbutton_compare").on("click", function () {
-                    // $('#openacct_progress_dialog_adduser').dialog({
-                    //     title: "新建用户",
-                    //     closed: false
-                    // });
-                    // $('#openacct_progress_dialog_adduser').dialog('center');
-                    addTabs("数据比对", "");
+                    if(!checkAfterclickToolBar()){
+                        return;
+                    }
+                    addTabs("数据比对", "/zg/home/openacct/progress/compare");
                 });
                 $("#openacct_progress_dialog_adduser_buttons_submit").on("click", function () {
                     var username = $("#openacct_progress_dialog_adduser_input_useracct").textbox("getValue");

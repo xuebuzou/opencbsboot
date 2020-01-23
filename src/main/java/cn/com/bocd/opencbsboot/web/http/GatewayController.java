@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.*;
 
 @Controller
@@ -18,26 +19,33 @@ public class GatewayController {
 
     @RequestMapping("zg/gateway")
     @ResponseBody
-    public RetDTO gateway(@RequestParam Map<String,String> map){
+    public RetDTO gateway(@RequestParam Map<String,Object> map){
         RetDTO ret = new RetDTO();
         CompositeData cd = new CompositeData();
         CompositeData syshead = new CompositeData();
+        CompositeData apphead = new CompositeData();
         syshead.put("SOURCE_TYPE",new StringField("ZG"));
         for(String key: map.keySet()){
             if(key.equals("MESSAGE_TYPE")){
-                syshead.put("MESSAGE_TYPE",new StringField(map.get(key)));
+                syshead.put("MESSAGE_TYPE",new StringField((String)map.get(key)));
             }
             if(key.equals("MESSAGE_CODE")){
-                syshead.put("MESSAGE_CODE",new StringField(map.get(key)));
+                syshead.put("MESSAGE_CODE",new StringField((String)map.get(key)));
             }
-            cd.put(key,new StringField(map.get(key)));
+            if(key.equals("page")){
+                apphead.put("PAGE_START",new StringField((String) map.get(key)));
+            }
+            if(key.equals("rows")){
+                apphead.put("TOTAL_NUM",new StringField((String)map.get(key)));
+            }
+            cd.put(key,new StringField((String)map.get(key)));
         }
         cd.put("SYS_HEAD",syshead);
+        cd.put("APP_HEAD",apphead);
         CompositeData2Json(dispatcher.doDispatch(cd),ret);
         return ret;
     }
 
-    //目前只能处理一层嵌套数据
     public void CompositeData2Json(CompositeData cd,RetDTO r){
         Array arr = (Array)cd.mGet("SYS_HEAD.RET");
         Object[] objs = arr.toArray();
@@ -49,6 +57,11 @@ public class GatewayController {
         Map<String, AtomData> data = cd.getData();
         for(String key:data.keySet()) {
             if (key.equals("SYS_HEAD") || key.equals("APP_HEAD") || key.equals("LOCAL_HEAD")) {
+                continue;
+            }
+            if(key.equals("TOTAL")){
+                IntField intField = (IntField)data.get(key);
+                r.setTotal(intField.getValue());
                 continue;
             }
             AtomData atomData = data.get(key);
@@ -70,7 +83,6 @@ public class GatewayController {
                     }
                     rows.add(itemmap);
                 }
-
             }
         }
         r.setRows(rows);

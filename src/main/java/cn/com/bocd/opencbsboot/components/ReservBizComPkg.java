@@ -4,13 +4,13 @@ import cn.com.bocd.opencbsboot.dao.openacct.ReservInfoDao;
 import cn.com.bocd.opencbsboot.entity.ReservInfo;
 import cn.com.bocd.opencbsboot.exception.OpenCbsException;
 import cn.com.bocd.opencbsboot.tool.DateUtils;
-import cn.com.bocd.opencbsboot.tool.compositedata.helper.Array;
-import cn.com.bocd.opencbsboot.tool.compositedata.helper.CDUtils;
-import cn.com.bocd.opencbsboot.tool.compositedata.helper.CompositeData;
-import cn.com.bocd.opencbsboot.tool.compositedata.helper.StringField;
+import cn.com.bocd.opencbsboot.tool.compositedata.helper.*;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 /**
@@ -60,9 +60,13 @@ public class ReservBizComPkg {
     }
 
     public void qryReservInfo(CompositeData req, CompositeData data, CompositeData resp) {
+        int start = Integer.parseInt(CDUtils.getFValue(req,"APP_HEAD.PAGE_START"));
+        int num = Integer.parseInt(CDUtils.getFValue(req,"APP_HEAD.TOTAL_NUM"));
+        PageHelper.startPage(start,num);
         ReservInfo reservInfo = new ReservInfo();
         setCommReqReservInfoParams(reservInfo,req);
         List<ReservInfo> infos = reservInfoDao.selectByParam(reservInfo);
+        PageInfo<ReservInfo> pageInfo = new PageInfo<>(infos);
         Array reserInfos = new Array();
         CompositeData infoStruct;
         for (ReservInfo info : infos) {
@@ -79,6 +83,8 @@ public class ReservBizComPkg {
             reserInfos.add(infoStruct);
         }
         resp.put("RESERV_INFO_ARRAY",reserInfos);
+        Long total = pageInfo.getTotal();
+        resp.put("TOTAL",new IntField(total.intValue()));
 
     }
 
