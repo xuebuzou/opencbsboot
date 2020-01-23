@@ -52,6 +52,12 @@ $(function(){
             g_acct_type_param = result.result['acct_type_def'];
         }
     });
+    $("#logout").on("click", function (){
+        $.get("/zg/logout",function () {
+            // sessionStorage.clear();
+            location.href="/zg";
+        });
+    });
 });
 
 function doPostFromZG(msgType,msgCode,params,func){

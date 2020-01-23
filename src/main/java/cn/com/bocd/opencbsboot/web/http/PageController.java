@@ -35,6 +35,11 @@ public class PageController {
         return "index";
     }
 
+    @GetMapping("/zg/index")
+    public String renderIndex2() {
+        return "index";
+    }
+
     @GetMapping("/unAuthorized")
     @ResponseBody
     public String unAuthorized() {
@@ -71,6 +76,17 @@ public class PageController {
             return ret;
         }
     }
+
+    @RequestMapping(value = "/zg/logout")
+    @ResponseBody
+    public RetDTO logout(){
+        RetDTO ret = new RetDTO();
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+        ret.setRetMsg("登出成功");
+        return ret;
+    }
+
     @GetMapping("/zg/home/init")
     @ResponseBody
     public RetDTO init(ReservInfo param) {

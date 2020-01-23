@@ -67,10 +67,11 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/static/css/*", "anon");
 		filterChainDefinitionMap.put("/static/data/*", "anon");
 		filterChainDefinitionMap.put("/static/image/*", "anon");
+		filterChainDefinitionMap.put("/zg/", "authc");
 		filterChainDefinitionMap.put("/zg/home", "authc");
 		filterChainDefinitionMap.put("/zg/home/openacct/*", "authc,roles[admin]");
 		filterChainDefinitionMap.put("/zg/home/settings/user*", "authc,roles[admin]");
-		filterChainDefinitionMap.put("/logout", "logout");
+//		filterChainDefinitionMap.put("/zg/logout", "logout");
 		sfilterBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 		return sfilterBean;
 	}
