@@ -81,9 +81,7 @@ public class PageController {
     @ResponseBody
     public RetDTO logout(){
         RetDTO ret = new RetDTO();
-        Subject subject = SecurityUtils.getSubject();
-        subject.logout();
-        ret.setRetMsg("登出成功");
+        SecurityUtils.getSubject().logout();
         return ret;
     }
 

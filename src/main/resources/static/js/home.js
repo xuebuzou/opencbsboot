@@ -54,9 +54,10 @@ $(function(){
     });
     $("#logout").on("click", function (){
         $.get("/zg/logout",function () {
-            // sessionStorage.clear();
-            location.href="/zg";
+            sessionStorage.clear();
+            location.href = "/zg";
         });
+
     });
 });
 
