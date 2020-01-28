@@ -204,6 +204,7 @@ public class OpenCbsDispatcher implements Dispatcher, ApplicationContextAware {
             for (BizComponent component : flow.getComponents()) {
                 Object serviceObj = context.getBean(component.getService());
                 Method method = serviceObj.getClass().getMethod(component.getFunc(), CompositeData.class, CompositeData.class, CompositeData.class);
+                logger.info("exec "+serviceObj.getClass().getSimpleName()+"."+method.getName());
                 method.invoke(serviceObj, req, data, resp);
             }
         } catch (Exception e) {
