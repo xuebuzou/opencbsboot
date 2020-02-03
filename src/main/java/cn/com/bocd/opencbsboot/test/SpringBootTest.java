@@ -1,5 +1,8 @@
 package cn.com.bocd.opencbsboot.test;
 
+import cn.com.bocd.opencbsboot.OpencbsbootApplication;
+import cn.com.bocd.opencbsboot.exception.OpenCbsException;
+import cn.com.bocd.opencbsboot.exception.ZgBizException;
 import cn.com.bocd.opencbsboot.tool.compositedata.helper.CDUtils;
 import cn.com.bocd.opencbsboot.tool.compositedata.helper.CompositeData;
 import cn.com.bocd.opencbsboot.web.tcp.util.rpc.impl.ESBBoundTransformer;
@@ -18,11 +21,11 @@ public class SpringBootTest {
     private static final Logger logger = Logger.getLogger(SpringBootTest.class);
 
     @Test
-    public void test12000001() throws IOException {
+    public void test14009009() throws IOException {
         ESBBoundTransformer transformer = new ESBBoundTransformer();
         Socket s = new Socket("localhost", 8899);
 
-        String path = SpringBootTest.class.getResource("12000001.xml").getPath();
+        String path = SpringBootTest.class.getResource("14009009.xml").getPath();
         File packet = new File(path);
         transformer.compositeData2Byte(CDUtils.fromFile(packet), s.getOutputStream());
         s.getOutputStream().flush();
@@ -34,10 +37,10 @@ public class SpringBootTest {
 
 
     @Test
-    public void test12000002() throws IOException {
+    public void QRY_RESERV() throws IOException {
         ESBBoundTransformer transformer = new ESBBoundTransformer();
         Socket s = new Socket("localhost", 8899);
-        String path = SpringBootTest.class.getResource("12000002.xml").getPath();
+        String path = SpringBootTest.class.getResource("QRY_RESERV.xml").getPath();
         File packet = new File(path);
         transformer.compositeData2Byte(CDUtils.fromFile(packet), s.getOutputStream());
         s.getOutputStream().flush();
@@ -46,4 +49,19 @@ public class SpringBootTest {
         logger.info("返回报文:\n" + CDUtils.toXml(cdExcepted, true));
         s.close();
     }
+
+    @Test
+    public void ADD_RESERV() throws IOException {
+        ESBBoundTransformer transformer = new ESBBoundTransformer();
+        Socket s = new Socket("localhost", 8899);
+        String path = SpringBootTest.class.getResource("ADD_RESERV.xml").getPath();
+        File packet = new File(path);
+        transformer.compositeData2Byte(CDUtils.fromFile(packet), s.getOutputStream());
+        s.getOutputStream().flush();
+        InputStream resp = s.getInputStream();
+        CompositeData cdExcepted = transformer.byte2CompositeData(resp);
+        logger.info("返回报文:\n" + CDUtils.toXml(cdExcepted, true));
+        s.close();
+    }
+
 }

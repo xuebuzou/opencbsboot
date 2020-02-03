@@ -1,12 +1,12 @@
 <flows>
-    <flow msgType="1000" msgCode="0001" srcType="CB|WX" desc="预约开户信息登记">
+    <flow msgType="ADD" msgCode="RESERV" srcType="CB|WX" desc="预约开户信息登记">
         <component type="check" service="ReservBizComPkg" func="ValidateInsertData" desc="校验预约开户数据"></component>
         <component type="biz" service="ReservBizComPkg" func="addReservInfo" desc="预约开户信息登记"></component>
     </flow>
-    <flow msgType="1000" msgCode="0002" srcType="ZG|CB|WX" desc="预约开户信息查询">
+    <flow msgType="QRY" msgCode="RESERV" srcType="ZG|CB|WX" desc="预约开户信息查询">
         <component type="check" service="ReservBizComPkg" func="qryReservInfo" desc="预约开户信息查询"></component>
     </flow>
-    <flow msgType="1000" msgCode="0003" srcType="ZG|CB" desc="预约开户信息维护">
+    <flow msgType="UPD" msgCode="RESERV" srcType="ZG|CB" desc="预约开户信息维护">
         <component type="check" service="ReservBizComPkg" func="ValidateUpdData" desc="校验维护数据合法性"></component>
         <component type="biz" service="ReservBizComPkg" func="updReservInfo" desc="预约开户信息维护"></component>
     </flow>

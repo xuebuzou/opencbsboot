@@ -1,6 +1,7 @@
 package cn.com.bocd.opencbsboot.dispatcher.impl;
 
 import cn.com.bocd.opencbsboot.dispatcher.util.factory.FlowFactory;
+import cn.com.bocd.opencbsboot.exception.ZgBizException;
 import cn.com.bocd.opencbsboot.tool.compositedata.helper.CDUtils;
 import cn.com.bocd.opencbsboot.tool.compositedata.helper.CompositeData;
 import cn.com.bocd.opencbsboot.tool.compositedata.helper.StringField;
@@ -91,7 +92,6 @@ public class OpenCbsDispatcher implements Dispatcher, ApplicationContextAware {
     public void doLoadConfigInJar() throws IOException {
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("flow.xml");
         doParseConfigInJar(inputStream);
-        logger.info(111);
     }
 
 
@@ -187,6 +187,7 @@ public class OpenCbsDispatcher implements Dispatcher, ApplicationContextAware {
             String msgtype = ((StringField) req.mGet("SYS_HEAD.MESSAGE_TYPE")).getValue();
             String msgcode = ((StringField) req.mGet("SYS_HEAD.MESSAGE_CODE")).getValue();
             String reqUrl = msgtype + "_" + msgcode + "_" + srctype;
+            logger.info("doDispatch begin "+"(url:"+reqUrl+"   seq:"+((StringField) req.mGet("SYS_HEAD.SEQ_NO")).getValue()+")");
             Iterator<Entry<String, Flow>> it = handlerMapping.entrySet().iterator();
             Flow flow = FlowFactory.getFlowInstance();
             while (it.hasNext()) {
@@ -211,14 +212,15 @@ public class OpenCbsDispatcher implements Dispatcher, ApplicationContextAware {
             return doHandleException(resp, e);
         }
         CDUtils.setRespStatus(resp, "S", "success", "执行成功");
+        logger.info("doDispatch end successfully");
         return resp;
     }
 
     public CompositeData doHandleException(CompositeData resp, Exception e) {
         if (e instanceof InvocationTargetException) {
             Throwable targetEx = ((InvocationTargetException) e).getTargetException();
-            if (targetEx instanceof OpenCbsException) {
-                OpenCbsException realEx = (OpenCbsException) targetEx;
+            if (targetEx instanceof ZgBizException) {
+                ZgBizException realEx = (ZgBizException) targetEx;
                 Class clazz = realEx.getClass();
                 try {
                     Field retCodeField = clazz.getField("retCode");

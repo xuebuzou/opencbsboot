@@ -41,6 +41,8 @@ public class DateUtils {
 
     public static final String FORMAT_FIVE="YYMMddHHmm";
 
+    public static final String FORMAT_SIX="YYMMddHHmmssSSS";
+
 
     // 年的加减
     public static final int SUB_YEAR = Calendar.YEAR;

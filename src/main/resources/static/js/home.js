@@ -69,8 +69,11 @@ function doPostFromZG(msgType,msgCode,params,func){
 
 function addTabs(text, url){
 	if ($("#dataTabs").tabs("exists", text)){
-		$("#dataTabs").tabs("select", text);
-		return;
+		// $("#dataTabs").tabs("select", text);
+        // window.alert("yidakai");
+        // $.messager.alert('提示信息', '请先关闭当前页签后再打开', 'error');
+        $("#dataTabs").tabs("close", text);
+		// return false;
 	}
 	$("#dataTabs").tabs("add",{
 	    title:text,

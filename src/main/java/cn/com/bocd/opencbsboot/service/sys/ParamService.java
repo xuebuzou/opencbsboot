@@ -8,7 +8,7 @@ import cn.com.bocd.opencbsboot.entity.AcctTypeDef;
 import cn.com.bocd.opencbsboot.entity.ReservStatusDef;
 
 import cn.com.bocd.opencbsboot.entity.sys.ZgDep;
-import generate.ZgDepDao;
+import cn.com.bocd.opencbsboot.dao.openacct.ZgDepDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

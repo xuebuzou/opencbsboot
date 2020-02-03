@@ -60,7 +60,7 @@ $(function () {
             ACCT_TYPE:acctType,
             NOTE:note
         };
-        doPostFromZG("1000","0003",params,function (result) {
+        doPostFromZG("UPD","RESERV",params,function (result) {
             if ("success" == result.retCode) {
                 $('#openacct_progress_table_datagrid_12').datagrid("reload");
                 $.messager.alert('提交成功', "交易执行成功","info");

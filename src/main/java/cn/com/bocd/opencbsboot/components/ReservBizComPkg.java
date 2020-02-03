@@ -3,6 +3,7 @@ package cn.com.bocd.opencbsboot.components;
 import cn.com.bocd.opencbsboot.dao.openacct.ReservInfoDao;
 import cn.com.bocd.opencbsboot.entity.ReservInfo;
 import cn.com.bocd.opencbsboot.exception.OpenCbsException;
+import cn.com.bocd.opencbsboot.exception.ZgBizException;
 import cn.com.bocd.opencbsboot.tool.DateUtils;
 import cn.com.bocd.opencbsboot.tool.compositedata.helper.*;
 import com.github.pagehelper.PageHelper;
@@ -35,8 +36,8 @@ public class ReservBizComPkg {
         ReservInfo reservInfo = new ReservInfo();
         reservInfo.setReservPhone(CDUtils.getFValue(req,"RESERV_PHONE"));
         reservInfo.setReservDate(DateUtils.getCurrDate(DateUtils.LONG_DATE_FORMAT));
-        if(reservInfoDao.selectByParam(reservInfo).size() >= 3){
-            throw new OpenCbsException("zg_biz_error","同一手机号每天最多预约三笔开户");
+        if(reservInfoDao.selectByParam(reservInfo).size() >= 0){
+            throw new ZgBizException("同一手机号每天最多预约三笔开户",req);
         }
     }
 

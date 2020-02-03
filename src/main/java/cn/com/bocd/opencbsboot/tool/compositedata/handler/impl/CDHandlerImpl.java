@@ -14,7 +14,7 @@ import java.io.UnsupportedEncodingException;
 
 @Component(value = "cdHandler")
 public class CDHandlerImpl implements CDHandler {
-    private static final Logger log = Logger.getLogger(CDHandler.class);
+    private static final Logger logger = Logger.getLogger(CDHandler.class);
     @Autowired
     @Qualifier("openCbsDispatcher")
     private Dispatcher dispatcher;
@@ -32,7 +32,9 @@ public class CDHandlerImpl implements CDHandler {
         try {
             String sreq = new String(req, "utf-8");
             CompositeData cd = CDUtils.fromXml(sreq);
+            logger.info("req data: \n" + new String(CDUtils.toXml(cd, true).getBytes("utf-8")));
             CompositeData resp = dispatcher.doDispatch(cd);
+            logger.info("resp data: \n" + new String(CDUtils.toXml(resp, true).getBytes("utf-8")));
             return CDUtils.toXml(resp).getBytes("utf-8");
         } catch (UnsupportedEncodingException e) {
             //TODO def a exception

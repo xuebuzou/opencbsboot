@@ -14,14 +14,14 @@
     </resultMap>
     <sql id="Base_Column_List">
       RESERV_ID, PT_NAME, CERT_NO, STATUS, DEP_CODE, RESERV_PHONE, ACCT_TYPE, VERIFIER, NOTE
-  </sql>
+    </sql>
     <sql id="BaseCondition">
         <where>
             <if test="reservId != null and reservId != ''">
-                and RESERV_ID = #{reservId}
+                and RESERV_ID like concat(concat('%',#{reservId}),'%')
             </if>
             <if test="ptName != null and ptName != ''">
-                and PT_NAME like CONCAT('%', #{ptName},'%')
+                and PT_NAME like concat(concat('%',#{ptName}),'%')
             </if>
             <if test="certNo != null and certNo != ''">
                 and CERT_NO = #{certNo}
@@ -72,7 +72,7 @@
       #{verifier,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{reservTime,jdbcType=VARCHAR}, #{reservDate,jdbcType=VARCHAR}
       )
   </insert>
-    <insert id="insertSelective" parameterType="generate.ReservInfo">
+    <insert id="insertSelective" parameterType="cn.com.bocd.opencbsboot.entity.ReservInfo">
         <selectKey keyProperty="reservId" order="AFTER" resultType="java.lang.String">
             Oracle
         </selectKey>
@@ -124,7 +124,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="generate.ReservInfo">
+    <update id="updateByPrimaryKeySelective" parameterType="cn.com.bocd.opencbsboot.entity.ReservInfo">
         update ZG.RESERV_INFO
         <set>
             <if test="ptName != null">

@@ -40,10 +40,7 @@ public class NioThread implements Runnable {
             s.set(SessionDef.REQUEST_REMOTE_ADDR, rsa);
             s.set(SessionDef.REQUEST_LOCAL_ADDR, lsa);
             s.set(SessionDef.RAW_REQUEST, req);
-
-            logger.info("请求数据   :"+new String(req));
             byte[] resp = cdHandler.doHandle(req);
-            logger.info("响应数据   :"+new String(resp));
             if (resp == null) {
                 throw new NullResponseException("response is null");
             } else {

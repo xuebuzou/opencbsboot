@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="generate.ZgDepDao">
-  <resultMap id="BaseResultMap" type="generate.ZgDep">
+<mapper namespace="cn.com.bocd.opencbsboot.dao.openacct.ZgDepDao">
+  <resultMap id="BaseResultMap" type="cn.com.bocd.opencbsboot.entity.sys.ZgDep">
     <id column="DEP_CODE" jdbcType="VARCHAR" property="depCode" />
     <result column="DEP_DESC" jdbcType="VARCHAR" property="depDesc" />
     <result column="DEP_ID" jdbcType="DECIMAL" property="depId" />
@@ -12,25 +12,19 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from ZG.ZG_DEP
+    from ZG_DEP
     where DEP_CODE = #{depCode,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from ZG.ZG_DEP
+    delete from ZG_DEP
     where DEP_CODE = #{depCode,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="generate.ZgDep">
-    <selectKey keyProperty="depCode" order="AFTER" resultType="java.lang.String">
-      Oracle
-    </selectKey>
-    insert into ZG.ZG_DEP (DEP_DESC, DEP_ID)
+  <insert id="insert" keyColumn="DEP_CODE" keyProperty="depCode" parameterType="cn.com.bocd.opencbsboot.entity.sys.ZgDep" useGeneratedKeys="true">
+    insert into ZG_DEP (DEP_DESC, DEP_ID)
     values (#{depDesc,jdbcType=VARCHAR}, #{depId,jdbcType=DECIMAL})
   </insert>
-  <insert id="insertSelective" parameterType="generate.ZgDep">
-    <selectKey keyProperty="depCode" order="AFTER" resultType="java.lang.String">
-      Oracle
-    </selectKey>
-    insert into ZG.ZG_DEP
+  <insert id="insertSelective" keyColumn="DEP_CODE" keyProperty="depCode" parameterType="cn.com.bocd.opencbsboot.entity.sys.ZgDep" useGeneratedKeys="true">
+    insert into ZG_DEP
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="depDesc != null">
         DEP_DESC,
@@ -48,8 +42,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="generate.ZgDep">
-    update ZG.ZG_DEP
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.bocd.opencbsboot.entity.sys.ZgDep">
+    update ZG_DEP
     <set>
       <if test="depDesc != null">
         DEP_DESC = #{depDesc,jdbcType=VARCHAR},
@@ -60,8 +54,8 @@
     </set>
     where DEP_CODE = #{depCode,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="generate.ZgDep">
-    update ZG.ZG_DEP
+  <update id="updateByPrimaryKey" parameterType="cn.com.bocd.opencbsboot.entity.sys.ZgDep">
+    update ZG_DEP
     set DEP_DESC = #{depDesc,jdbcType=VARCHAR},
       DEP_ID = #{depId,jdbcType=DECIMAL}
     where DEP_CODE = #{depCode,jdbcType=VARCHAR}

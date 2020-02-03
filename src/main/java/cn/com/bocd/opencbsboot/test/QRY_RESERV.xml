@@ -31,7 +31,7 @@
 					<field length="6" scale="0" type="string">127.0.0.1</field>
 				</data>
 				<data name="MESSAGE_CODE">
-					<field length="6" scale="0" type="string">0002</field>
+					<field length="6" scale="0" type="string">RESERV</field>
 				</data>
 				<data name="SERVICE_CODE">
 					<field length="30" scale="0" type="string">SVR_ZG</field>
@@ -70,7 +70,7 @@
 					<field length="1" scale="0" type="string">ONLINE</field>
 				</data>
 				<data name="MESSAGE_TYPE">
-					<field length="4" scale="0" type="string">1200</field>
+					<field length="4" scale="0" type="string">QRY</field>
 				</data>
 				<data name="WS_ID">
 					<field length="200" scale="0" type="string">001</field>
@@ -94,10 +94,10 @@
 					<field length="15" scale="0" type="string">0</field>
 				</data>
 				<data name="PAGE_START">
-					<field length="15" scale="0" type="string">0</field>
+					<field length="15" scale="0" type="string">1</field>
 				</data>
 				<data name="TOTAL_NUM">
-					<field length="8" scale="0" type="string">-1</field>
+					<field length="8" scale="0" type="string">3</field>
 				</data>
 			</struct>
 		</data>

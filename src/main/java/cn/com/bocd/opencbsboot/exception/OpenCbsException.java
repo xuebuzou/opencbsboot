@@ -1,11 +1,13 @@
 package cn.com.bocd.opencbsboot.exception;
 
+import cn.com.bocd.opencbsboot.tool.compositedata.helper.CompositeData;
+
 /**
  * @创建人 chengke
  * @创建时间 2019/12/5
  * @描述
  */
-public class OpenCbsException extends Exception{
+public class OpenCbsException extends Exception {
     public String retCode;
     public String retMsg;
 
@@ -20,5 +22,9 @@ public class OpenCbsException extends Exception{
 
     public void setRetMsg(String retMsg) {
         this.retMsg = retMsg;
+    }
+
+    public void printStack(){
+        this.printStackTrace();
     }
 }

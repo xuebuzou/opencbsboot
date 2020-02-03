@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bocd.opencbsboot.dao.openacct.ZgErrorLogDao">
+  <resultMap id="BaseResultMap" type="cn.com.bocd.opencbsboot.entity.ZgErrorLog">
+    <result column="MSG_TYPE" jdbcType="VARCHAR" property="msgType" />
+    <result column="MSG_CODE" jdbcType="VARCHAR" property="msgCode" />
+    <result column="SRC_TYPE" jdbcType="VARCHAR" property="srcType" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="STACK_MSG" jdbcType="VARCHAR" property="stackMsg" />
+    <result column="RET_MSG" jdbcType="VARCHAR" property="retMsg" />
+    <result column="SEQ_NO" jdbcType="VARCHAR" property="seqNo" />
+    <result column="REQ_XML" jdbcType="VARCHAR" property="reqXml" />
+    <result column="LOG_TIME" jdbcType="VARCHAR" property="logTime" />
+  </resultMap>
+  <insert id="insert" parameterType="cn.com.bocd.opencbsboot.entity.ZgErrorLog">
+    insert into ZG_ERROR_LOG (MSG_TYPE, MSG_CODE, SRC_TYPE, 
+      USER_ID, STACK_MSG, RET_MSG, 
+      SEQ_NO, REQ_XML, LOG_TIME
+      )
+    values (#{msgType,jdbcType=VARCHAR}, #{msgCode,jdbcType=VARCHAR}, #{srcType,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=VARCHAR}, #{stackMsg,jdbcType=VARCHAR}, #{retMsg,jdbcType=VARCHAR}, 
+      #{seqNo,jdbcType=VARCHAR}, #{reqXml,jdbcType=VARCHAR}, #{logTime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.bocd.opencbsboot.entity.ZgErrorLog">
+    insert into ZG_ERROR_LOG
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="msgType != null">
+        MSG_TYPE,
+      </if>
+      <if test="msgCode != null">
+        MSG_CODE,
+      </if>
+      <if test="srcType != null">
+        SRC_TYPE,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="stackMsg != null">
+        STACK_MSG,
+      </if>
+      <if test="retMsg != null">
+        RET_MSG,
+      </if>
+      <if test="seqNo != null">
+        SEQ_NO,
+      </if>
+      <if test="reqXml != null">
+        REQ_XML,
+      </if>
+      <if test="logTime != null">
+        LOG_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="msgType != null">
+        #{msgType,jdbcType=VARCHAR},
+      </if>
+      <if test="msgCode != null">
+        #{msgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="srcType != null">
+        #{srcType,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="stackMsg != null">
+        #{stackMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="retMsg != null">
+        #{retMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="seqNo != null">
+        #{seqNo,jdbcType=VARCHAR},
+      </if>
+      <if test="reqXml != null">
+        #{reqXml,jdbcType=VARCHAR},
+      </if>
+      <if test="logTime != null">
+        #{logTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

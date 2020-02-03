@@ -17,12 +17,11 @@ $(function () {
                 });
                 var datagrid_toolbar = "#openacct_progress_table_datagrid_12_toolbar";
                 var params = {
-                    MESSAGE_TYPE:"1000",
-                    MESSAGE_CODE:"0002"
+                    MESSAGE_TYPE:"QRY",
+                    MESSAGE_CODE:"RESERV"
                 };
                 $("#openacct_progress_table_datagrid_12").datagrid(
                     {
-                        // url: "/zg/home/openacct/progress/datagrid",
                         url: "/zg/gateway",
                         nowrap: false,
                         queryParams:params,
@@ -31,8 +30,8 @@ $(function () {
                         idField: "RESERV_ID",
                         fitColumns: true,
                         singleSelect: false,
-                        pageSize: 2,
-                        pageList: [2, 5, 50],
+                        pageSize: 10,
+                        pageList: [10, 20, 50],
                         toolbar: datagrid_toolbar,
                         columns: [[
                             {
@@ -257,7 +256,6 @@ $(function () {
                         roleId: roleId,
                         depId: depId
                     };
-                    console.log('模拟修改提交,params', params);
                     $.post("/zg/home/settings/user/upduser", params, function (result) {
                         if ("success" == result.retCode) {
                             $.messager.show({
@@ -309,18 +307,25 @@ $(function () {
                 });
 
                 $("#openacct_progress_linkbutton_query").on("click", function () {
-                    var username = $("#openacct_progress_input_acct").textbox("getValue");
-                    var cnname = $("#openacct_progress_input_cnname").textbox("getValue");
-                    var roleId = $('#openacct_progress_combobox_role').combobox('getValue');
-                    var depId = $('#openacct_progress_combobox_dep').combobox('getValue');
+                    var reservId = $("#openacct_progress_input_reservId").textbox("getValue");
+                    var ptName = $("#openacct_progress_input_ptName").textbox("getValue");
+                    var certNo = $("#openacct_progress_input_certNo").textbox("getValue");
+                    var status = $("#openacct_progress_combobox_status").combobox("getValue");
+                    var depCode = $("#openacct_progress_combobox_dep").combobox("getValue");
+                    var reservPhone = $("#openacct_progress_input_reservPhone").textbox("getValue");
                     var qryParam = {
-                        username: username,
-                        cnname: cnname,
-                        roleId: roleId,
-                        depId: depId
+                        RESERV_ID: reservId,
+                        PT_NAME: ptName,
+                        CERT_NO: certNo,
+                        STATUS: status,
+                        DEP_CODE: depCode,
+                        RESERV_PHONE: reservPhone,
+                        MESSAGE_TYPE:"QRY",
+                        MESSAGE_CODE:"RESERV"
                     };
-                    $("#openacct_progress_table_usergrid_12").datagrid("reload", qryParam);
+                    $("#openacct_progress_table_datagrid_12").datagrid("reload", qryParam);
                 });
+
                 $("#openacct_progress_linkbutton_reset").on("click", function () {
                     $("#openacct_progress_input_acct").textbox("clear");
                     $("#openacct_progress_input_cnname").textbox("clear");

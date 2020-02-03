@@ -1,6 +1,6 @@
-package generate;
+package cn.com.bocd.opencbsboot.dao.openacct;
 
-import generate.ZgDep;
+import cn.com.bocd.opencbsboot.entity.sys.ZgDep;
 
 public interface ZgDepDao {
     int deleteByPrimaryKey(String depCode);
