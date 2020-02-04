@@ -36,7 +36,7 @@ public class ReservBizComPkg {
         ReservInfo reservInfo = new ReservInfo();
         reservInfo.setReservPhone(CDUtils.getFValue(req,"RESERV_PHONE"));
         reservInfo.setReservDate(DateUtils.getCurrDate(DateUtils.LONG_DATE_FORMAT));
-        if(reservInfoDao.selectByParam(reservInfo).size() >= 0){
+        if(reservInfoDao.selectByParam(reservInfo).size() >= 3){
             throw new ZgBizException("同一手机号每天最多预约三笔开户",req);
         }
     }

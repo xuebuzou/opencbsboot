@@ -19,6 +19,10 @@ public class ZgErrorLog implements Serializable {
     private String seqNo;
     private String reqXml;
     private String logTime;
+    private String reqBody;
+    private String sysHead;
+    private String appHead;
+    private String errorType;
 
     public String getMsgType() {
         return msgType;
@@ -58,6 +62,38 @@ public class ZgErrorLog implements Serializable {
 
     public void setStackMsg(String stackMsg) {
         this.stackMsg = stackMsg;
+    }
+
+    public String getReqBody() {
+        return reqBody;
+    }
+
+    public void setReqBody(String reqBody) {
+        this.reqBody = reqBody;
+    }
+
+    public String getSysHead() {
+        return sysHead;
+    }
+
+    public void setSysHead(String sysHead) {
+        this.sysHead = sysHead;
+    }
+
+    public String getAppHead() {
+        return appHead;
+    }
+
+    public void setAppHead(String appHead) {
+        this.appHead = appHead;
+    }
+
+    public String getErrorType() {
+        return errorType;
+    }
+
+    public void setErrorType(String errorType) {
+        this.errorType = errorType;
     }
 
     public String getRetMsg() {

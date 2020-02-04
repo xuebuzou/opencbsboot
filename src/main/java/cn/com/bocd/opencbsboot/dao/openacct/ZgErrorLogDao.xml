@@ -9,17 +9,22 @@
     <result column="STACK_MSG" jdbcType="VARCHAR" property="stackMsg" />
     <result column="RET_MSG" jdbcType="VARCHAR" property="retMsg" />
     <result column="SEQ_NO" jdbcType="VARCHAR" property="seqNo" />
-    <result column="REQ_XML" jdbcType="VARCHAR" property="reqXml" />
     <result column="LOG_TIME" jdbcType="VARCHAR" property="logTime" />
+    <result column="REQ_BODY" jdbcType="VARCHAR" property="reqBody" />
+    <result column="SYS_HEAD" jdbcType="VARCHAR" property="sysHead" />
+    <result column="APP_HEAD" jdbcType="VARCHAR" property="appHead" />
+    <result column="ERROR_TYPE" jdbcType="VARCHAR" property="errorType" />
   </resultMap>
   <insert id="insert" parameterType="cn.com.bocd.opencbsboot.entity.ZgErrorLog">
     insert into ZG_ERROR_LOG (MSG_TYPE, MSG_CODE, SRC_TYPE, 
       USER_ID, STACK_MSG, RET_MSG, 
-      SEQ_NO, REQ_XML, LOG_TIME
+      SEQ_NO, LOG_TIME, REQ_BODY,
+      SYS_HEAD, APP_HEAD, ERROR_TYPE
       )
     values (#{msgType,jdbcType=VARCHAR}, #{msgCode,jdbcType=VARCHAR}, #{srcType,jdbcType=VARCHAR}, 
       #{userId,jdbcType=VARCHAR}, #{stackMsg,jdbcType=VARCHAR}, #{retMsg,jdbcType=VARCHAR}, 
-      #{seqNo,jdbcType=VARCHAR}, #{reqXml,jdbcType=VARCHAR}, #{logTime,jdbcType=VARCHAR}
+      #{seqNo,jdbcType=VARCHAR}, #{logTime,jdbcType=VARCHAR}, #{reqBody,jdbcType=VARCHAR},
+      #{sysHead,jdbcType=VARCHAR}, #{appHead,jdbcType=VARCHAR}, #{errorType,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="cn.com.bocd.opencbsboot.entity.ZgErrorLog">
@@ -46,11 +51,20 @@
       <if test="seqNo != null">
         SEQ_NO,
       </if>
-      <if test="reqXml != null">
-        REQ_XML,
-      </if>
       <if test="logTime != null">
         LOG_TIME,
+      </if>
+      <if test="reqBody != null">
+        REQ_BODY,
+      </if>
+      <if test="sysHead != null">
+        SYS_HEAD,
+      </if>
+      <if test="appHead != null">
+        APP_HEAD,
+      </if>
+      <if test="errorType != null">
+        ERROR_TYPE,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -75,11 +89,20 @@
       <if test="seqNo != null">
         #{seqNo,jdbcType=VARCHAR},
       </if>
-      <if test="reqXml != null">
-        #{reqXml,jdbcType=VARCHAR},
-      </if>
       <if test="logTime != null">
         #{logTime,jdbcType=VARCHAR},
+      </if>
+      <if test="reqBody != null">
+        #{reqBody,jdbcType=VARCHAR},
+      </if>
+      <if test="sysHead != null">
+        #{sysHead,jdbcType=VARCHAR},
+      </if>
+      <if test="appHead != null">
+        #{appHead,jdbcType=VARCHAR},
+      </if>
+      <if test="errorType != null">
+        #{errorType,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>

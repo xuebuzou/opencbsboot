@@ -3,6 +3,8 @@ package cn.com.bocd.opencbsboot.service.sys;
 import cn.com.bocd.opencbsboot.dao.openacct.ZgErrorLogDao;
 import cn.com.bocd.opencbsboot.entity.ZgErrorLog;
 import cn.com.bocd.opencbsboot.exception.ZgBizException;
+import cn.com.bocd.opencbsboot.exception.ZgException;
+import cn.com.bocd.opencbsboot.exception.ZgPtException;
 import cn.com.bocd.opencbsboot.tool.DateUtils;
 import cn.com.bocd.opencbsboot.tool.compositedata.helper.CDUtils;
 import cn.com.bocd.opencbsboot.tool.compositedata.helper.CompositeData;
@@ -26,11 +28,12 @@ public class LogService {
         this.zgErrorLogDao = zgErrorLogDao;
     }
 
-    public void writeZgBizExceptionLog(ZgBizException ex){
+    public void writeErrorLog(ZgException ex){
         CompositeData cd = ex.getCompositeData().deepCopy();
-//        CompositeData body = new CompositeData();
+        CompositeData sys = new CompositeData();
+        CompositeData app = new CompositeData();
 
-        String retMsg = ex.retMsg;
+        String retMsg = ex.getRetMsg();
         String msgType = ((StringField) cd.mGet("SYS_HEAD.MESSAGE_TYPE")).getValue();
         String msgCode = ((StringField) cd.mGet("SYS_HEAD.MESSAGE_CODE")).getValue();
         String srcType = ((StringField) cd.mGet("SYS_HEAD.SOURCE_TYPE")).getValue();
@@ -52,18 +55,23 @@ public class LogService {
         String stackMsg = sw.toString();
         zgErrorLog.setStackMsg(stackMsg);
 
+        sys = (CompositeData)cd.mGet("SYS_HEAD");
+        app = (CompositeData)cd.mGet("APP_HEAD");
+
         cd.remove("SYS_HEAD");
         cd.remove("LOCAL_HEAD");
         cd.remove("APP_HEAD");
 
-        String reqXml = CDUtils.toXml(cd);
-        String reqXmlFormatted = CDUtils.toXml(cd,true);
-        zgErrorLog.setReqXml(reqXmlFormatted);
+        zgErrorLog.setReqBody(CDUtils.toXml(cd,true));
+        zgErrorLog.setSysHead(CDUtils.toXml(sys,true));
+        zgErrorLog.setAppHead(CDUtils.toXml(app,true));
 
-        System.out.println("---------------------------------------------------------------");
-        System.out.println(reqXml.length());
-        System.out.println(reqXmlFormatted.length());
-        System.out.println("---------------------------------------------------------------");
+        if(ex instanceof ZgPtException){
+            zgErrorLog.setErrorType("pt");
+        }else if(ex instanceof ZgBizException){
+            zgErrorLog.setErrorType("biz");
+        }
+
         zgErrorLogDao.insert(zgErrorLog);
     }
 }

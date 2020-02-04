@@ -2,6 +2,7 @@ package cn.com.bocd.opencbsboot.dispatcher.impl;
 
 import cn.com.bocd.opencbsboot.dispatcher.util.factory.FlowFactory;
 import cn.com.bocd.opencbsboot.exception.ZgBizException;
+import cn.com.bocd.opencbsboot.exception.ZgPtException;
 import cn.com.bocd.opencbsboot.tool.compositedata.helper.CDUtils;
 import cn.com.bocd.opencbsboot.tool.compositedata.helper.CompositeData;
 import cn.com.bocd.opencbsboot.tool.compositedata.helper.StringField;
@@ -200,7 +201,7 @@ public class OpenCbsDispatcher implements Dispatcher, ApplicationContextAware {
                 }
             }
             if(flow.getComponents().size()==0){
-                throw new OpenCbsException("zg_pt_error","找不到业务执行流，请检查flow.xml配置文件");
+                throw new ZgPtException("当前请求未配置业务执行流",req);
             }
             for (BizComponent component : flow.getComponents()) {
                 Object serviceObj = context.getBean(component.getService());
@@ -209,15 +210,15 @@ public class OpenCbsDispatcher implements Dispatcher, ApplicationContextAware {
                 method.invoke(serviceObj, req, data, resp);
             }
         } catch (Exception e) {
-            return doHandleException(resp, e);
+            return doHandleException(req,resp, e);
         }
         CDUtils.setRespStatus(resp, "S", "success", "执行成功");
         logger.info("doDispatch end successfully");
         return resp;
     }
 
-    public CompositeData doHandleException(CompositeData resp, Exception e) {
-        if (e instanceof InvocationTargetException) {
+    public CompositeData doHandleException(CompositeData req,CompositeData resp, Exception e) {
+        if (e instanceof InvocationTargetException) { //caused by reflection
             Throwable targetEx = ((InvocationTargetException) e).getTargetException();
             if (targetEx instanceof ZgBizException) {
                 ZgBizException realEx = (ZgBizException) targetEx;
@@ -230,7 +231,8 @@ public class OpenCbsDispatcher implements Dispatcher, ApplicationContextAware {
                     return resp;
                 } catch (NoSuchFieldException | IllegalAccessException e1) {
                     e1.printStackTrace();
-                    CDUtils.setRespStatus(resp, "F", "zg_pt_error", "平台配置错误，请检查flow配置文件和Service类定义");
+                    ZgPtException zgPtException = new ZgPtException(e1.getMessage(),req);
+                    CDUtils.setRespStatus(resp, "F", zgPtException.retCode, zgPtException.retMsg);
                     return resp;
                 }
             } else {
@@ -240,7 +242,8 @@ public class OpenCbsDispatcher implements Dispatcher, ApplicationContextAware {
                     targetExCause = targetEx.getCause();
                 }
                 e.printStackTrace();
-                CDUtils.setRespStatus(resp, "F", "999999", targetEx.getMessage());
+                ZgPtException zgPtException = new ZgPtException(targetEx.getMessage(),req);
+                CDUtils.setRespStatus(resp, "F", zgPtException.retCode, zgPtException.retMsg);
                 return resp;
             }
         } else if (e instanceof NoSuchMethodException
@@ -248,14 +251,16 @@ public class OpenCbsDispatcher implements Dispatcher, ApplicationContextAware {
                 || e instanceof NoSuchFieldException
                 || e instanceof NoSuchBeanDefinitionException) {
             e.printStackTrace();
-            CDUtils.setRespStatus(resp, "F", "zg_pt_error", "请检查flow配置文件和Service类定义");
+            ZgPtException zgPtException = new ZgPtException(e.getMessage(),req);
+            CDUtils.setRespStatus(resp, "F", zgPtException.retCode, zgPtException.retMsg);
             return resp;
-        } else if (e instanceof OpenCbsException){
-            CDUtils.setRespStatus(resp,"F",((OpenCbsException) e).retCode,((OpenCbsException) e).retMsg);
+        } else if (e instanceof ZgPtException){
+            CDUtils.setRespStatus(resp,"F",((ZgPtException) e).retCode,((ZgPtException) e).retMsg);
             return resp;
         } else{
             e.printStackTrace();
-            CDUtils.setRespStatus(resp, "F", "zg_other_error", "其他错误");
+            ZgPtException zgPtException = new ZgPtException(e.getMessage(),req);
+            CDUtils.setRespStatus(resp, "F", zgPtException.retCode, zgPtException.retMsg);
             return resp;
         }
     }
