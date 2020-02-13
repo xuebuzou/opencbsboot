@@ -1,4 +1,6 @@
-CREATE TABLE ZG.BUSINESS_INFO
+create table BUSINESS_INFO
 (
     PT_NAME VARCHAR2(150)
-);
+)
+/
+
