@@ -27,7 +27,7 @@ public class ReservBizComPkg {
     public void ValidateUpdData(CompositeData req, CompositeData data, CompositeData resp) throws Exception{
         if(!CDUtils.getFValue(req,"SYS_HEAD.SOURCE_TYPE").equals("ZG")){
             if(!CDUtils.getFValue(req,"STATUS").equals("")){
-                throw new OpenCbsException("zg_biz_error","电子渠道不能修改开户状态");
+                throw new ZgBizException("电子渠道不能修改开户状态",req);
             }
         }
     }
